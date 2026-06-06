@@ -18,7 +18,7 @@ Rebar Illumination is an addon for the Rebar framework that provides a rich colo
 - **5 Lamp Types**: Block Lamps, Pillar Lamps, Sphere Lamps, Wall Lamps, Bar Lamps
 - **16 Colors**: Supports all 16 Minecraft dye colors
 - **Interactive Control**: Sneak + Right Click to toggle lamp state
-- **Faulty Mode**: Lamps can enter faulty mode, fixable with Illumar
+- **Faulty Mode**: Lamps can enter faulty mode, fixable with same-colored Illumar
 - **Research System**: Integrated with Rebar's research system
 - **Note**: All lamps require DynamicLight plugin or shader pack to emit light
 
@@ -28,44 +28,11 @@ Rebar Illumination is an addon for the Rebar framework that provides a rich colo
 2. Place `RebarIllumination.jar` in your server's `plugins` directory
 3. Restart your server
 
-### 🛠️ Recipes
-
-#### Illumar
-```
-空  | 红石 | 空
-空  | 玻璃 | 空
-染料 | 空   | 空
-```
-
-#### Block Lamp
-```
-荧光粉 | 荧光粉 | 荧光粉
-荧光粉 | 玻璃   | 荧光粉
-荧光粉 | 荧光粉 | 荧光粉
-```
-
 ### 🎮 Usage
 
 - **Place Lamp**: Right-click to place while holding the lamp
 - **Toggle Lamp**: Sneak + Right-click on a placed lamp
-- **Fix Faulty Mode**: Right-click a faulty lamp with Illumar
-
-### 📁 Project Structure
-
-```
-RebarIllumination/
-├── src/main/
-│   ├── kotlin/io/github/rebarillumination/
-│   │   ├── block/          # Block definitions
-│   │   ├── item/           # Item definitions
-│   │   └── util/           # Utility classes
-│   └── resources/
-│       ├── lang/           # Language files
-│       ├── settings/       # Configuration files
-│       └── plugin.yml      # Plugin description
-├── build.gradle.kts        # Gradle build configuration
-└── gradle.properties       # Project properties
-```
+- **Fix Faulty Mode**: Right-click a faulty lamp with same-colored Illumar
 
 ### 📝 Configuration
 
