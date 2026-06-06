@@ -1,0 +1,8 @@
+name: RebarIllumination
+version: 1.0.0
+main: io.github.rebarillumination.RebarIlluminationAddon
+load: STARTUP
+depend:
+  - Rebar
+  - Pylon
+api-version: 26.1.2
