@@ -63,6 +63,24 @@ jobs:
         id: extract_version
         run: echo "VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
 
+      - name: Generate changelog
+        id: changelog
+        run: |
+          # 获取上一个 tag
+          PREVIOUS_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
+          
+          # 生成 changelog
+          if [ -n "$PREVIOUS_TAG" ]; then
+            COMMITS=$(git log $PREVIOUS_TAG..HEAD --pretty=format:"- %s" --no-merges)
+          else
+            COMMITS=$(git log --pretty=format:"- %s" --no-merges -20)
+          fi
+          
+          # 写入多行输出
+          echo "changes<<EOF" >> $GITHUB_OUTPUT
+          echo "$COMMITS" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -74,32 +92,24 @@ jobs:
           body: |
             ## Rebar Illumination v${{ steps.extract_version.outputs.VERSION }}
             
-            ### Changes
+            ### 变更内容
             
-            - See commit history for details
+            ${{ steps.changelog.outputs.changes }}
             
-            ### Requirements
+            ### 系统要求
             
-            - Minecraft: 1.21.1
+            - Minecraft: 26.1.2
             - Rebar: 0.40.0-26.1+
             - Pylon: 0.38.0-26.1+
             
-            ### Installation
+            ### 安装方法
             
-            1. Place `RebarIllumination-${{ steps.extract_version.outputs.VERSION }}.jar` in your server's `plugins` directory
-            2. Restart your server
+            1. 将 `RebarIllumination-${{ steps.extract_version.outputs.VERSION }}.jar` 放入服务器的 `plugins` 目录
+            2. 重启服务器
             
-            ### Features
+            ### 注意事项
             
-            - 5 Lamp Types: Block Lamps, Pillar Lamps, Sphere Lamps, Wall Lamps, Bar Lamps
-            - 16 Colors: Supports all 16 Minecraft dye colors
-            - Interactive Control: Sneak + Right Click to toggle lamp state
-            - Faulty Mode: Lamps can enter faulty mode, fixable with Illumar
-            - Research System: Integrated with Rebar's research system
-            
-            ### Note
-            
-            All lamps require DynamicLight plugin or shader pack to emit light
+            所有灯具需要安装 DynamicLight 插件或使用光影才能发光
           draft: false
           prerelease: false
 
