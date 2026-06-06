@@ -1,7 +1,11 @@
 # Rebar Illumination
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-blue.svg)](https://www.minecraft.net/)
+[![Minecraft](https://img.shields.io/badge/Minecraft-26.1.2-blue.svg)](https://www.minecraft.net/)
+[![Rebar](https://img.shields.io/badge/Rebar-0.40.0--26.1-blue.svg)](https://github.com/pylonmc/rebar)
+[![Pylon](https://img.shields.io/badge/Pylon-0.38.0--26.1-blue.svg)](https://github.com/pylonmc/pylon)
+
+[English Version](README.en.md)
 
 ---
 
@@ -16,6 +20,7 @@ Rebar Illumination 是 Rebar 框架的一个附属组件，为 Minecraft 提供�
 - **交互式控制**：潜行 + 右键点击切换灯的开关状态
 - **故障模式**：灯具有故障模式，可以使用荧光粉解除
 - **研究系统**：集成 Rebar 的研究系统
+- **注意**：所有灯具需要安装 DynamicLight 插件或使用光影才能发光
 
 ### 📦 安装
 
@@ -69,7 +74,3 @@ RebarIllumination/
 ### 📜 许可证
 
 本项目采用 MIT 许可证，详见 [LICENSE](LICENSE) 文件。
-
----
-
-[English Version](README.en.md)

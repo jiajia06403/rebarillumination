@@ -1,7 +1,11 @@
 # Rebar Illumination
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Minecraft](https://img.shields.io/badge/Minecraft-1.21.1-blue.svg)](https://www.minecraft.net/)
+[![Minecraft](https://img.shields.io/badge/Minecraft-26.1.2-blue.svg)](https://www.minecraft.net/)
+[![Rebar](https://img.shields.io/badge/Rebar-0.40.0--26.1-blue.svg)](https://github.com/pylonmc/rebar)
+[![Pylon](https://img.shields.io/badge/Pylon-0.38.0--26.1-blue.svg)](https://github.com/pylonmc/pylon)
+
+[中文版](README.md)
 
 ---
 
@@ -16,6 +20,7 @@ Rebar Illumination is an addon for the Rebar framework that provides a rich colo
 - **Interactive Control**: Sneak + Right Click to toggle lamp state
 - **Faulty Mode**: Lamps can enter faulty mode, fixable with Illumar
 - **Research System**: Integrated with Rebar's research system
+- **Note**: All lamps require DynamicLight plugin or shader pack to emit light
 
 ### 📦 Installation
 
@@ -69,7 +74,3 @@ Plugin configuration files are located in `plugins/Rebar/settings/rebarilluminat
 ### 📜 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
-
----
-
-[中文版](README.md)
