@@ -92,24 +92,7 @@ jobs:
           body: |
             ## Rebar Illumination v${{ steps.extract_version.outputs.VERSION }}
             
-            ### 变更内容
-            
             ${{ steps.changelog.outputs.changes }}
-            
-            ### 系统要求
-            
-            - Minecraft: 26.1.2
-            - Rebar: 0.40.0-26.1+
-            - Pylon: 0.38.0-26.1+
-            
-            ### 安装方法
-            
-            1. 将 `RebarIllumination-${{ steps.extract_version.outputs.VERSION }}.jar` 放入服务器的 `plugins` 目录
-            2. 重启服务器
-            
-            ### 注意事项
-            
-            所有灯具需要安装 DynamicLight 插件或使用光影才能发光
           draft: false
           prerelease: false
 
