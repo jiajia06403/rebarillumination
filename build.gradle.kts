@@ -31,9 +31,9 @@ dependencies {
     compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
     compileOnly("io.github.pylonmc:rebar:$rebarVersion")
     compileOnly("io.github.pylonmc:pylon:$pylonVersion")
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
-    implementation("org.jetbrains.kotlin:kotlin-reflect:2.3.0")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
+    compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
+    compileOnly("org.jetbrains.kotlin:kotlin-reflect:2.3.0")
+    compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     compileOnly("xyz.xenondevs.invui:invui:2.1.0")
     compileOnly("xyz.xenondevs.invui:invui-kotlin:2.1.0")
 }
