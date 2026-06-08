@@ -43,12 +43,27 @@ object RebarIlluminationGuide {
             RebarRegistry.ITEMS[wallLampKey]?.getItemStack()?.let { wallLampsPage.addItem(it) }
         }
 
+        val rainbowKey = "rainbow"
+        val rainbowIllumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_$rainbowKey")
+        val rainbowLampKey = NamespacedKey(RebarIlluminationAddon.instance, "lamp_$rainbowKey")
+        val rainbowPillarLampKey = NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_$rainbowKey")
+        val rainbowBarLampKey = NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_$rainbowKey")
+        val rainbowSphereLampKey = NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$rainbowKey")
+        val rainbowWallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_$rainbowKey")
+
+        RebarRegistry.ITEMS[rainbowIllumarKey]?.getItemStack()?.let { illumarPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowLampKey]?.getItemStack()?.let { lampsPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowPillarLampKey]?.getItemStack()?.let { pillarLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowBarLampKey]?.getItemStack()?.let { barLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowSphereLampKey]?.getItemStack()?.let { sphereLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowWallLampKey]?.getItemStack()?.let { wallLampsPage.addItem(it) }
+
         illuminationRoot.addPage(Material.GLOWSTONE_DUST, illumarPage)
-        illuminationRoot.addPage(Material.REDSTONE_LAMP, lampsPage)
-        illuminationRoot.addPage(Material.LANTERN, pillarLampsPage)
+        illuminationRoot.addPage(Material.SEA_LANTERN, lampsPage)
+        illuminationRoot.addPage(Material.END_ROD, pillarLampsPage)
         illuminationRoot.addPage(Material.END_ROD, barLampsPage)
-        illuminationRoot.addPage(Material.TORCH, sphereLampsPage)
-        illuminationRoot.addPage(Material.STICK, wallLampsPage)
+        illuminationRoot.addPage(Material.LANTERN, sphereLampsPage)
+        illuminationRoot.addPage(Material.TORCH, wallLampsPage)
 
         RebarGuide.rootPage.addPage(Material.GLOWSTONE, illuminationRoot)
     }

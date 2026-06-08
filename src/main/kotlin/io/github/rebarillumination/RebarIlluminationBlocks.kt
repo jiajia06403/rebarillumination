@@ -2,6 +2,7 @@ package io.github.rebarillumination
 
 import io.github.pylonmc.rebar.block.RebarBlock
 import io.github.rebarillumination.block.*
+import io.github.rebarillumination.util.LampColor
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
 
@@ -9,7 +10,7 @@ object RebarIlluminationBlocks {
 
     private val colors = listOf(
         "white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
-        "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"
+        "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black", "rainbow"
     )
 
     fun initialize() {
@@ -33,6 +34,7 @@ object RebarIlluminationBlocks {
                 "green" -> Material.GREEN_STAINED_GLASS
                 "red" -> Material.RED_STAINED_GLASS
                 "black" -> Material.BLACK_STAINED_GLASS
+                "rainbow" -> Material.WHITE_STAINED_GLASS
                 else -> Material.WHITE_STAINED_GLASS
             }
             RebarBlock.register(key, glassMaterial, LampBlock::class.java)

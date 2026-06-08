@@ -51,6 +51,16 @@ interface FaultyLamp {
             Settings.get(CONFIG_KEY)
                 .get("max-fault-duration-intervals", ConfigAdapter.INTEGER, 20)
         }
+
+        val RIGHT_CLICK_FIX_CHANCE: Double by lazy {
+            Settings.get(CONFIG_KEY)
+                .get("right-click-fix-chance", ConfigAdapter.DOUBLE, 0.2)
+        }
+
+        val RAINBOW_COLOR_CHANGE_INTERVAL: Int by lazy {
+            Settings.get(CONFIG_KEY)
+                .get("rainbow-color-change-interval", ConfigAdapter.INTEGER, 10)
+        }
     }
     
     fun handleFaultyModeInteraction(event: PlayerInteractEvent, priority: EventPriority) {
@@ -90,6 +100,22 @@ interface FaultyLamp {
                 }
             }
         }
+    }
+
+    fun tryRightClickFix(event: PlayerInteractEvent, priority: EventPriority): Boolean {
+        if (!isFaulty || !event.action.isRightClick || event.hand != EquipmentSlot.HAND) return false
+
+        if (priority == EventPriority.NORMAL) {
+            event.setUseItemInHand(org.bukkit.event.Event.Result.DENY)
+            return true
+        }
+
+        if (Random.nextDouble() <= RIGHT_CLICK_FIX_CHANCE) {
+            disableFaultyMode(event.player)
+        } else {
+            event.player.playSound(block.location, Sound.BLOCK_LEVER_CLICK, 0.5f, 0.5f)
+        }
+        return true
     }
     
     private fun enableFaultyMode(player: Player) {

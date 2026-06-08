@@ -21,10 +21,19 @@ object RebarIlluminationResearch {
         colors.forEach { color ->
             unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "illumar_$color"))
             unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "lamp_$color"))
-            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "factory_lamp_$color"))
+            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_$color"))
+            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_$color"))
             unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$color"))
             unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_$color"))
         }
+
+        val rainbow = "rainbow"
+        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "illumar_$rainbow"))
+        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "lamp_$rainbow"))
+        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_$rainbow"))
+        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_$rainbow"))
+        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$rainbow"))
+        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_$rainbow"))
 
         val researchKey = NamespacedKey(RebarIlluminationAddon.instance, "illumination")
         val icon = ItemStackBuilder.rebar(Material.GLOWSTONE_DUST, researchKey).build()
@@ -32,8 +41,8 @@ object RebarIlluminationResearch {
         val research = Research(
             key = researchKey,
             itemTemplate = icon,
-            name = Component.translatable("rebarillumination.research.illumination.name"),
-            cost = 100,
+            name = Component.translatable("rebarillumination.research.illumination_basic"),
+            cost = 50,
             unlocks = unlocks
         )
         

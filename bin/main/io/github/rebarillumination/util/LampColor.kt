@@ -21,11 +21,16 @@ enum class LampColor(
     BROWN(Material.BROWN_DYE, Material.BROWN_STAINED_GLASS),
     GREEN(Material.GREEN_DYE, Material.GREEN_STAINED_GLASS),
     RED(Material.RED_DYE, Material.RED_STAINED_GLASS),
-    BLACK(Material.BLACK_DYE, Material.BLACK_STAINED_GLASS);
+    BLACK(Material.BLACK_DYE, Material.BLACK_STAINED_GLASS),
+    RAINBOW(Material.WHITE_DYE, Material.WHITE_STAINED_GLASS);
 
     companion object {
         fun fromName(name: String): LampColor {
             return entries.find { it.name.equals(name, ignoreCase = true) } ?: WHITE
+        }
+
+        fun getNonRainbowColors(): List<LampColor> {
+            return entries.filter { it != RAINBOW }
         }
     }
 }

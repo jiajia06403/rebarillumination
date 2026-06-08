@@ -10,12 +10,7 @@ import org.bukkit.inventory.ShapedRecipe
 
 object RebarIlluminationRecipes {
 
-    private val colors = listOf(
-        LampColor.WHITE, LampColor.ORANGE, LampColor.MAGENTA, LampColor.LIGHT_BLUE,
-        LampColor.YELLOW, LampColor.LIME, LampColor.PINK, LampColor.GRAY,
-        LampColor.LIGHT_GRAY, LampColor.CYAN, LampColor.PURPLE, LampColor.BLUE,
-        LampColor.BROWN, LampColor.GREEN, LampColor.RED, LampColor.BLACK
-    )
+    private val colors = LampColor.getNonRainbowColors()
 
     private val dyeMaterials = mapOf(
         LampColor.WHITE to Material.WHITE_DYE,
@@ -45,6 +40,12 @@ object RebarIlluminationRecipes {
             registerSphereLampRecipe(color)
             registerWallLampRecipe(color)
         }
+
+        // 注册彩虹荧光石配方
+        registerRainbowIllumarRecipe()
+
+        // 注册彩虹灯配方
+        registerRainbowLampRecipes()
     }
 
     private fun registerIllumarRecipe(color: LampColor) {
@@ -108,7 +109,7 @@ object RebarIlluminationRecipes {
         val illumarSchema = RebarRegistry.ITEMS[illumarKey] ?: return
         val illumarItem = illumarSchema.getItemStack()
 
-        // 条状灯 = 荧光粉 + 末影烛
+        // 条状灯 = 荧光粉 + 末地烛
         val recipe = ShapedRecipe(barLampKey, barLampItem)
             .shape("I", "E")
             .setIngredient('I', RecipeChoice.ExactChoice(illumarItem))
@@ -154,5 +155,87 @@ object RebarIlluminationRecipes {
             .setIngredient('T', Material.TORCH)
 
         ShapedRecipeType.addRecipe(recipe)
+    }
+
+    private fun registerRainbowIllumarRecipe() {
+        val rainbowIllumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_rainbow")
+        val schema = RebarRegistry.ITEMS[rainbowIllumarKey] ?: return
+        val rainbowIllumarItem = schema.getItemStack()
+
+        // 获取所有荧光石物品
+        val allIllumarItems = colors.mapNotNull { color ->
+            val key = NamespacedKey(RebarIlluminationAddon.instance, "illumar_${color.name.lowercase()}")
+            RebarRegistry.ITEMS[key]?.getItemStack()
+        }
+
+        if (allIllumarItems.size < 9) return
+
+        val recipe = ShapedRecipe(rainbowIllumarKey, rainbowIllumarItem)
+            .shape("III", "III", "III")
+            .setIngredient('I', RecipeChoice.ExactChoice(allIllumarItems))
+
+        ShapedRecipeType.addRecipe(recipe)
+    }
+
+    private fun registerRainbowLampRecipes() {
+        val rainbowIllumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_rainbow")
+        val rainbowIllumarSchema = RebarRegistry.ITEMS[rainbowIllumarKey] ?: return
+        val rainbowIllumarItem = rainbowIllumarSchema.getItemStack()
+
+        // 彩虹灯
+        val rainbowLampKey = NamespacedKey(RebarIlluminationAddon.instance, "lamp_rainbow")
+        val rainbowLampSchema = RebarRegistry.ITEMS[rainbowLampKey] ?: return
+        val rainbowLampItem = rainbowLampSchema.getItemStack()
+
+        val rainbowLampRecipe = ShapedRecipe(rainbowLampKey, rainbowLampItem)
+            .shape("I", "L")
+            .setIngredient('I', RecipeChoice.ExactChoice(rainbowIllumarItem))
+            .setIngredient('L', Material.REDSTONE_LAMP)
+        ShapedRecipeType.addRecipe(rainbowLampRecipe)
+
+        // 彩虹柱状灯
+        val rainbowPillarLampKey = NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_rainbow")
+        val rainbowPillarLampSchema = RebarRegistry.ITEMS[rainbowPillarLampKey] ?: return
+        val rainbowPillarLampItem = rainbowPillarLampSchema.getItemStack()
+
+        val rainbowPillarLampRecipe = ShapedRecipe(rainbowPillarLampKey, rainbowPillarLampItem)
+            .shape("I", "N")
+            .setIngredient('I', RecipeChoice.ExactChoice(rainbowIllumarItem))
+            .setIngredient('N', Material.LANTERN)
+        ShapedRecipeType.addRecipe(rainbowPillarLampRecipe)
+
+        // 彩虹条状灯
+        val rainbowBarLampKey = NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_rainbow")
+        val rainbowBarLampSchema = RebarRegistry.ITEMS[rainbowBarLampKey] ?: return
+        val rainbowBarLampItem = rainbowBarLampSchema.getItemStack()
+
+        val rainbowBarLampRecipe = ShapedRecipe(rainbowBarLampKey, rainbowBarLampItem)
+            .shape("I", "E")
+            .setIngredient('I', RecipeChoice.ExactChoice(rainbowIllumarItem))
+            .setIngredient('E', Material.END_ROD)
+        ShapedRecipeType.addRecipe(rainbowBarLampRecipe)
+
+        // 彩虹球形灯
+        val rainbowSphereLampKey = NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_rainbow")
+        val rainbowSphereLampSchema = RebarRegistry.ITEMS[rainbowSphereLampKey] ?: return
+        val rainbowSphereLampItem = rainbowSphereLampSchema.getItemStack()
+
+        val rainbowSphereLampRecipe = ShapedRecipe(rainbowSphereLampKey, rainbowSphereLampItem)
+            .shape("I", "T")
+            .setIngredient('I', RecipeChoice.ExactChoice(rainbowIllumarItem))
+            .setIngredient('T', Material.TORCH)
+        ShapedRecipeType.addRecipe(rainbowSphereLampRecipe)
+
+        // 彩虹壁灯
+        val rainbowWallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_rainbow")
+        val rainbowWallLampSchema = RebarRegistry.ITEMS[rainbowWallLampKey] ?: return
+        val rainbowWallLampItem = rainbowWallLampSchema.getItemStack()
+
+        val rainbowWallLampRecipe = ShapedRecipe(rainbowWallLampKey, rainbowWallLampItem)
+            .shape(" I ", "DIT")
+            .setIngredient('I', Material.IRON_INGOT)
+            .setIngredient('D', RecipeChoice.ExactChoice(rainbowIllumarItem))
+            .setIngredient('T', Material.TORCH)
+        ShapedRecipeType.addRecipe(rainbowWallLampRecipe)
     }
 }

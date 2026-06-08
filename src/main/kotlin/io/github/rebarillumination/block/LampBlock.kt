@@ -39,6 +39,9 @@ class LampBlock(
         private val IS_LIT_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "is_lit")
         private val COLOR_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "color")
         private val FACING_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "facing")
+        private val RAINBOW_INDEX_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "rainbow_index")
+        private val LAST_RAINBOW_CHANGE_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "last_rainbow_change")
+        private val NON_RAINBOW_COLORS = LampColor.getNonRainbowColors()
     }
 
     override val isLit: Boolean
@@ -48,6 +51,9 @@ class LampBlock(
     override var facing: BlockFace = context.facingVertical
     override var isFaulty: Boolean = false
     override var faultyEndTick: Long = 0L
+    private var isRainbow: Boolean = false
+    private var rainbowColorIndex: Int = 0
+    private var lastRainbowChangeTick: Long = 0L
 
     @Suppress("unused")
     constructor(block: Block, pdc: PersistentDataContainer) : this(
@@ -60,6 +66,8 @@ class LampBlock(
         facing = pdc.get(FACING_KEY, PersistentDataType.STRING)?.let { BlockFace.valueOf(it) } ?: BlockFace.UP
         isFaulty = pdc.get(IS_FAULTY_KEY, PersistentDataType.BOOLEAN) ?: false
         faultyEndTick = pdc.get(FAULTY_TICK_KEY, PersistentDataType.LONG) ?: 0L
+        rainbowColorIndex = pdc.get(RAINBOW_INDEX_KEY, PersistentDataType.INTEGER) ?: 0
+        lastRainbowChangeTick = pdc.get(LAST_RAINBOW_CHANGE_KEY, PersistentDataType.LONG) ?: 0L
     }
 
     override fun write(pdc: PersistentDataContainer) {
@@ -68,6 +76,8 @@ class LampBlock(
         pdc.set(FACING_KEY, PersistentDataType.STRING, facing.name)
         pdc.set(IS_FAULTY_KEY, PersistentDataType.BOOLEAN, isFaulty)
         pdc.set(FAULTY_TICK_KEY, PersistentDataType.LONG, faultyEndTick)
+        pdc.set(RAINBOW_INDEX_KEY, PersistentDataType.INTEGER, rainbowColorIndex)
+        pdc.set(LAST_RAINBOW_CHANGE_KEY, PersistentDataType.LONG, lastRainbowChangeTick)
     }
 
     init {
@@ -75,6 +85,7 @@ class LampBlock(
         val keyStr = key.key
         val colorName = keyStr.removePrefix("lamp_")
         lampColor = LampColor.fromName(colorName)
+        isRainbow = colorName == "rainbow"
         setTickInterval(FaultyLamp.lampFaultTickInterval)
     }
 
@@ -82,6 +93,9 @@ class LampBlock(
         // 只在实体不存在时创建，避免加载时重复创建
         if (!isHeldEntityPresent("light")) {
             createDisplayEntity()
+        }
+        if (isRainbow) {
+            updateRainbowBlock()
         }
     }
 
@@ -98,6 +112,9 @@ class LampBlock(
 
     override fun postLoad() {
         updateDisplayEntities()
+        if (isRainbow) {
+            updateRainbowBlock()
+        }
     }
 
     override fun updateDisplayEntities() {
@@ -110,12 +127,43 @@ class LampBlock(
         lightDisplay?.setItemStack(ItemStack(displayMaterial))
     }
 
+    private fun updateRainbowBlock() {
+        val color = NON_RAINBOW_COLORS[rainbowColorIndex]
+        block.type = color.stainedGlassMaterial
+    }
+
+    private fun tickRainbow() {
+        if (!isRainbow) return
+        val currentTick = block.world.gameTime
+        val interval = FaultyLamp.RAINBOW_COLOR_CHANGE_INTERVAL
+        if (currentTick - lastRainbowChangeTick >= interval) {
+            rainbowColorIndex = (rainbowColorIndex + 1) % NON_RAINBOW_COLORS.size
+            lastRainbowChangeTick = currentTick
+            updateRainbowBlock()
+        }
+    }
+
     @MultiHandler(priorities = [EventPriority.NORMAL, EventPriority.MONITOR])
     override fun onInteract(event: PlayerInteractEvent, priority: EventPriority) {
         if (!event.action.isRightClick
             || event.hand != EquipmentSlot.HAND
             || event.useInteractedBlock() == Event.Result.DENY) {
             return
+        }
+
+        // 如果在故障模式下
+        if (isFaulty) {
+            if (event.player.isSneaking) {
+                // 故障模式下禁止切换灯
+                if (priority == EventPriority.NORMAL) {
+                    event.setUseItemInHand(Event.Result.DENY)
+                }
+                return
+            }
+            // 尝试右键修复
+            if (tryRightClickFix(event, priority)) {
+                return
+            }
         }
 
         if (event.player.isSneaking) {
@@ -152,12 +200,13 @@ class LampBlock(
         if (itemStack != null) {
             drops.add(itemStack)
         } else {
-            drops.add(ItemStack(lampColor.stainedGlassMaterial))
+            drops.add(ItemStack(if (isRainbow) Material.WHITE_STAINED_GLASS else lampColor.stainedGlassMaterial))
         }
     }
     
     override fun tick() {
         tickFaultyMode()
+        tickRainbow()
     }
     
     override fun getWaila(player: Player): WailaDisplay? {
