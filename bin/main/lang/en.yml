@@ -4,87 +4,87 @@ item:
   illumar_white:
     name: "White Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_orange:
     name: "Orange Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_magenta:
     name: "Magenta Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_light_blue:
     name: "Light Blue Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_yellow:
     name: "Yellow Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_lime:
     name: "Lime Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_pink:
     name: "Pink Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_gray:
     name: "Gray Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_light_gray:
     name: "Light Gray Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_cyan:
     name: "Cyan Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_purple:
     name: "Purple Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_blue:
     name: "Blue Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_brown:
     name: "Brown Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_green:
     name: "Green Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_red:
     name: "Red Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_black:
     name: "Black Illumar"
     lore: |-
-      <arrow> Used to craft colored lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
   illumar_rainbow:
     name: "Rainbow Illumar"
     lore: |-
-      <arrow> Used to craft rainbow lamps
+      <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
 
   lamp_white:
@@ -92,520 +92,435 @@ item:
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "White Lamp%status%"
   lamp_orange:
     name: "Orange Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Orange Lamp%status%"
   lamp_magenta:
     name: "Magenta Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Magenta Lamp%status%"
   lamp_light_blue:
     name: "Light Blue Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Light Blue Lamp%status%"
   lamp_yellow:
     name: "Yellow Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Yellow Lamp%status%"
   lamp_lime:
     name: "Lime Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Lime Lamp%status%"
   lamp_pink:
     name: "Pink Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Pink Lamp%status%"
   lamp_gray:
     name: "Gray Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Gray Lamp%status%"
   lamp_light_gray:
     name: "Light Gray Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Light Gray Lamp%status%"
   lamp_cyan:
     name: "Cyan Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Cyan Lamp%status%"
   lamp_purple:
     name: "Purple Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Purple Lamp%status%"
   lamp_blue:
     name: "Blue Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Blue Lamp%status%"
   lamp_brown:
     name: "Brown Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Brown Lamp%status%"
   lamp_green:
     name: "Green Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Green Lamp%status%"
   lamp_red:
     name: "Red Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Red Lamp%status%"
   lamp_black:
     name: "Black Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Black Lamp%status%"
   lamp_rainbow:
     name: "Rainbow Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
       <arrow> Changes color every few ticks
-    waila: "Rainbow Lamp%status%"
 
   pillar_lamp_white:
     name: "White Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "White Pillar Lamp%status%"
   pillar_lamp_orange:
     name: "Orange Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Orange Pillar Lamp%status%"
   pillar_lamp_magenta:
     name: "Magenta Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Magenta Pillar Lamp%status%"
   pillar_lamp_light_blue:
     name: "Light Blue Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Light Blue Pillar Lamp%status%"
   pillar_lamp_yellow:
     name: "Yellow Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Yellow Pillar Lamp%status%"
   pillar_lamp_lime:
     name: "Lime Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Lime Pillar Lamp%status%"
   pillar_lamp_pink:
     name: "Pink Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Pink Pillar Lamp%status%"
   pillar_lamp_gray:
     name: "Gray Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Gray Pillar Lamp%status%"
   pillar_lamp_light_gray:
     name: "Light Gray Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Light Gray Pillar Lamp%status%"
   pillar_lamp_cyan:
     name: "Cyan Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Cyan Pillar Lamp%status%"
   pillar_lamp_purple:
     name: "Purple Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Purple Pillar Lamp%status%"
   pillar_lamp_blue:
     name: "Blue Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Blue Pillar Lamp%status%"
   pillar_lamp_brown:
     name: "Brown Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Brown Pillar Lamp%status%"
   pillar_lamp_green:
     name: "Green Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Green Pillar Lamp%status%"
   pillar_lamp_red:
     name: "Red Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Red Pillar Lamp%status%"
   pillar_lamp_black:
     name: "Black Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Black Pillar Lamp%status%"
   pillar_lamp_rainbow:
     name: "Rainbow Pillar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
       <arrow> Changes color every few ticks
-    waila: "Rainbow Pillar Lamp%status%"
 
   sphere_lamp_white:
     name: "White Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "White Sphere Lamp%status%"
   sphere_lamp_orange:
     name: "Orange Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Orange Sphere Lamp%status%"
   sphere_lamp_magenta:
     name: "Magenta Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Magenta Sphere Lamp%status%"
   sphere_lamp_light_blue:
     name: "Light Blue Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Light Blue Sphere Lamp%status%"
   sphere_lamp_yellow:
     name: "Yellow Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Yellow Sphere Lamp%status%"
   sphere_lamp_lime:
     name: "Lime Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Lime Sphere Lamp%status%"
   sphere_lamp_pink:
     name: "Pink Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Pink Sphere Lamp%status%"
   sphere_lamp_gray:
     name: "Gray Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Gray Sphere Lamp%status%"
   sphere_lamp_light_gray:
     name: "Light Gray Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Light Gray Sphere Lamp%status%"
   sphere_lamp_cyan:
     name: "Cyan Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Cyan Sphere Lamp%status%"
   sphere_lamp_purple:
     name: "Purple Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Purple Sphere Lamp%status%"
   sphere_lamp_blue:
     name: "Blue Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Blue Sphere Lamp%status%"
   sphere_lamp_brown:
     name: "Brown Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Brown Sphere Lamp%status%"
   sphere_lamp_green:
     name: "Green Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Green Sphere Lamp%status%"
   sphere_lamp_red:
     name: "Red Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Red Sphere Lamp%status%"
   sphere_lamp_black:
     name: "Black Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Black Sphere Lamp%status%"
   sphere_lamp_rainbow:
     name: "Rainbow Sphere Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
       <arrow> Changes color every few ticks
-    waila: "Rainbow Sphere Lamp%status%"
 
   wall_lamp_white:
     name: "White Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "White Wall Lamp%status%"
   wall_lamp_orange:
     name: "Orange Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Orange Wall Lamp%status%"
   wall_lamp_magenta:
     name: "Magenta Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Magenta Wall Lamp%status%"
   wall_lamp_light_blue:
     name: "Light Blue Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Light Blue Wall Lamp%status%"
   wall_lamp_yellow:
     name: "Yellow Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Yellow Wall Lamp%status%"
   wall_lamp_lime:
     name: "Lime Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Lime Wall Lamp%status%"
   wall_lamp_pink:
     name: "Pink Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Pink Wall Lamp%status%"
   wall_lamp_gray:
     name: "Gray Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Gray Wall Lamp%status%"
   wall_lamp_light_gray:
     name: "Light Gray Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Light Gray Wall Lamp%status%"
   wall_lamp_cyan:
     name: "Cyan Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Cyan Wall Lamp%status%"
   wall_lamp_purple:
     name: "Purple Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Purple Wall Lamp%status%"
   wall_lamp_blue:
     name: "Blue Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Blue Wall Lamp%status%"
   wall_lamp_brown:
     name: "Brown Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Brown Wall Lamp%status%"
   wall_lamp_green:
     name: "Green Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Green Wall Lamp%status%"
   wall_lamp_red:
     name: "Red Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Red Wall Lamp%status%"
   wall_lamp_black:
     name: "Black Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Black Wall Lamp%status%"
   wall_lamp_rainbow:
     name: "Rainbow Wall Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
       <arrow> Changes color every few ticks
-    waila: "Rainbow Wall Lamp%status%"
 
   bar_lamp_white:
     name: "White Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "White Bar Lamp%status%"
   bar_lamp_orange:
     name: "Orange Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Orange Bar Lamp%status%"
   bar_lamp_magenta:
     name: "Magenta Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Magenta Bar Lamp%status%"
   bar_lamp_light_blue:
     name: "Light Blue Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Light Blue Bar Lamp%status%"
   bar_lamp_yellow:
     name: "Yellow Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Yellow Bar Lamp%status%"
   bar_lamp_lime:
     name: "Lime Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Lime Bar Lamp%status%"
   bar_lamp_pink:
     name: "Pink Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Pink Bar Lamp%status%"
   bar_lamp_gray:
     name: "Gray Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Gray Bar Lamp%status%"
   bar_lamp_light_gray:
     name: "Light Gray Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Light Gray Bar Lamp%status%"
   bar_lamp_cyan:
     name: "Cyan Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Cyan Bar Lamp%status%"
   bar_lamp_purple:
     name: "Purple Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Purple Bar Lamp%status%"
   bar_lamp_blue:
     name: "Blue Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Blue Bar Lamp%status%"
   bar_lamp_brown:
     name: "Brown Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Brown Bar Lamp%status%"
   bar_lamp_green:
     name: "Green Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Green Bar Lamp%status%"
   bar_lamp_red:
     name: "Red Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Red Bar Lamp%status%"
   bar_lamp_black:
     name: "Black Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
-    waila: "Black Bar Lamp%status%"
   bar_lamp_rainbow:
     name: "Rainbow Bar Lamp"
     lore:  |-
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
       <arrow> Changes color every few ticks
-    waila: "Rainbow Bar Lamp%status%"
 
 message:
   lamp:

@@ -1,6 +1,6 @@
 package io.github.rebarillumination.block
 
-import io.github.pylonmc.rebar.config.Settings
+import io.github.pylonmc.rebar.config.ConfigSection
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter
 import io.github.pylonmc.rebar.item.RebarItem
 import io.github.rebarillumination.RebarIlluminationAddon
@@ -33,32 +33,32 @@ interface FaultyLamp {
         private val CONFIG_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "decoration_lamp")
         
         val lampFaultTickInterval: Int by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("lamp-fault-tick-interval", ConfigAdapter.INTEGER, 2)
         }
         
         private val FAULT_CHANCE: Double by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("fault-chance", ConfigAdapter.DOUBLE, 0.02)
         }
         
         private val MIN_FAULT_DURATION_INTERVALS: Int by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("min-fault-duration-intervals", ConfigAdapter.INTEGER, 1)
         }
         
         private val MAX_FAULT_DURATION_INTERVALS: Int by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("max-fault-duration-intervals", ConfigAdapter.INTEGER, 20)
         }
 
         val RIGHT_CLICK_FIX_CHANCE: Double by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("right-click-fix-chance", ConfigAdapter.DOUBLE, 0.2)
         }
 
         val RAINBOW_COLOR_CHANGE_INTERVAL: Int by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("rainbow-color-change-interval", ConfigAdapter.INTEGER, 10)
         }
     }
@@ -113,7 +113,7 @@ interface FaultyLamp {
         if (Random.nextDouble() <= RIGHT_CLICK_FIX_CHANCE) {
             disableFaultyMode(event.player)
         } else {
-            event.player.playSound(block.location, Sound.BLOCK_LEVER_CLICK, 0.5f, 0.5f)
+            event.player.playSound(block.location, Sound.BLOCK_ANVIL_LAND, 0.3f, 0.8f)
         }
         return true
     }

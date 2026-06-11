@@ -14,7 +14,7 @@ object RebarIlluminationGuide {
     private val pillarLampsPage = SimpleStaticGuidePage(NamespacedKey(RebarIlluminationAddon.instance, "illumination_pillar_lamps"))
     private val barLampsPage = SimpleStaticGuidePage(NamespacedKey(RebarIlluminationAddon.instance, "illumination_bar_lamps"))
     private val sphereLampsPage = SimpleStaticGuidePage(NamespacedKey(RebarIlluminationAddon.instance, "illumination_sphere_lamps"))
-    private val wallLampsPage = SimpleStaticGuidePage(NamespacedKey(RebarIlluminationAddon.instance, "illumination_wall_lamps"))
+    private val wallLampsPage = SimpleStaticGuidePage(NamespacedKey(RebarIlluminationAddon.instance, "illumination_patch_lamps"))
     private val illumarPage = SimpleStaticGuidePage(NamespacedKey(RebarIlluminationAddon.instance, "illumination_illumar"))
 
     fun initialize() {
@@ -33,7 +33,7 @@ object RebarIlluminationGuide {
             val pillarLampKey = NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_$colorName")
             val barLampKey = NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_$colorName")
             val sphereLampKey = NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$colorName")
-            val wallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_$colorName")
+            val wallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$colorName")
 
             RebarRegistry.ITEMS[illumarKey]?.getItemStack()?.let { illumarPage.addItem(it) }
             RebarRegistry.ITEMS[lampKey]?.getItemStack()?.let { lampsPage.addItem(it) }
@@ -49,7 +49,7 @@ object RebarIlluminationGuide {
         val rainbowPillarLampKey = NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_$rainbowKey")
         val rainbowBarLampKey = NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_$rainbowKey")
         val rainbowSphereLampKey = NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$rainbowKey")
-        val rainbowWallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_$rainbowKey")
+        val rainbowWallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$rainbowKey")
 
         RebarRegistry.ITEMS[rainbowIllumarKey]?.getItemStack()?.let { illumarPage.addItem(it) }
         RebarRegistry.ITEMS[rainbowLampKey]?.getItemStack()?.let { lampsPage.addItem(it) }

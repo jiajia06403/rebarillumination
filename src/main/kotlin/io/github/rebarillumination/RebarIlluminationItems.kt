@@ -7,7 +7,7 @@ import io.github.rebarillumination.item.IllumarItem
 import io.github.rebarillumination.item.LampItem
 import io.github.rebarillumination.item.PillarLampItem
 import io.github.rebarillumination.item.SphereLampItem
-import io.github.rebarillumination.item.WallLampItem
+import io.github.rebarillumination.item.PatchLampItem
 import io.github.rebarillumination.util.LampColor
 import io.papermc.paper.datacomponent.DataComponentTypes
 import net.kyori.adventure.text.Component
@@ -55,11 +55,11 @@ object RebarIlluminationItems {
             RebarItem.register(SphereLampItem::class.java, sphereLampTemplate, sphereLampKey)
 
             // 注册壁灯物品（关联到方块）- 使用结构空位，但ITEM_MODEL显示染色玻璃
-            val wallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_$colorName")
+            val wallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$colorName")
             val wallLampTemplate = ItemStackBuilder.rebar(Material.STRUCTURE_VOID, wallLampKey)
                 .set(DataComponentTypes.ITEM_MODEL, color.stainedGlassMaterial.key)
                 .build()
-            RebarItem.register(WallLampItem::class.java, wallLampTemplate, wallLampKey)
+            RebarItem.register(PatchLampItem::class.java, wallLampTemplate, wallLampKey)
         }
 
         // 注册彩虹荧光粉
@@ -92,10 +92,10 @@ object RebarIlluminationItems {
             .build()
         RebarItem.register(SphereLampItem::class.java, rainbowSphereLampTemplate, rainbowSphereLampKey)
 
-        val rainbowWallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_rainbow")
+        val rainbowWallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_rainbow")
         val rainbowWallLampTemplate = ItemStackBuilder.rebar(Material.STRUCTURE_VOID, rainbowWallLampKey)
             .set(DataComponentTypes.ITEM_MODEL, rainbowColor.stainedGlassMaterial.key)
             .build()
-        RebarItem.register(WallLampItem::class.java, rainbowWallLampTemplate, rainbowWallLampKey)
+        RebarItem.register(PatchLampItem::class.java, rainbowWallLampTemplate, rainbowWallLampKey)
     }
 }

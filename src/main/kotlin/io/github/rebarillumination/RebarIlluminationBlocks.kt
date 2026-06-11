@@ -52,10 +52,10 @@ object RebarIlluminationBlocks {
             RebarBlock.register(key, Material.STRUCTURE_VOID, SphereLampBlock::class.java)
         }
 
-        // 壁灯：结构空位基底
+        // 贴片灯：结构空位基底
         colors.forEach { color ->
-            val key = NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_$color")
-            RebarBlock.register(key, Material.STRUCTURE_VOID, WallLampBlock::class.java)
+            val key = NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$color")
+            RebarBlock.register(key, Material.STRUCTURE_VOID, PatchLampBlock::class.java)
         }
 
         // 条状灯：结构空位基底，东西南北方向保持竖直柱体，上下方向支持两种柱体朝向

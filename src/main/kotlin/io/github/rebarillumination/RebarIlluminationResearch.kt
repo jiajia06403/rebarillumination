@@ -24,7 +24,7 @@ object RebarIlluminationResearch {
             unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_$color"))
             unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_$color"))
             unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$color"))
-            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_$color"))
+            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$color"))
         }
 
         val rainbow = "rainbow"
@@ -33,7 +33,7 @@ object RebarIlluminationResearch {
         unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_$rainbow"))
         unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_$rainbow"))
         unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$rainbow"))
-        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "wall_lamp_$rainbow"))
+        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$rainbow"))
 
         val researchKey = NamespacedKey(RebarIlluminationAddon.instance, "illumination")
         val icon = ItemStackBuilder.rebar(Material.GLOWSTONE_DUST, researchKey).build()

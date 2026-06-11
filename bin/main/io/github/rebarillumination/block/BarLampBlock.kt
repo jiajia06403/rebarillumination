@@ -1,11 +1,11 @@
 package io.github.rebarillumination.block
 
 import io.github.pylonmc.rebar.block.RebarBlock
-import io.github.pylonmc.rebar.block.base.RebarBreakHandler
-import io.github.pylonmc.rebar.block.base.RebarDirectionalBlock
-import io.github.pylonmc.rebar.block.base.RebarEntityHolderBlock
-import io.github.pylonmc.rebar.block.base.RebarInteractBlock
-import io.github.pylonmc.rebar.block.base.RebarTickingBlock
+import io.github.pylonmc.rebar.block.interfaces.BlockBreakRebarBlockHandler
+import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock
+import io.github.pylonmc.rebar.block.interfaces.EntityHolderRebarBlock
+import io.github.pylonmc.rebar.block.interfaces.InteractRebarBlockHandler
+import io.github.pylonmc.rebar.block.interfaces.TickingRebarBlock
 import io.github.pylonmc.rebar.block.context.BlockCreateContext
 import io.github.pylonmc.rebar.event.RebarBlockPlaceEvent
 import io.github.pylonmc.rebar.event.api.annotation.MultiHandler
@@ -36,7 +36,7 @@ import org.joml.Vector3f
 class BarLampBlock(
     block: Block,
     context: BlockCreateContext
-) : RebarBlock(block, context), RebarInteractBlock, RebarBreakHandler, RebarEntityHolderBlock, RebarDirectionalBlock, RebarTickingBlock, FaultyLamp {
+) : RebarBlock(block, context), InteractRebarBlockHandler, BlockBreakRebarBlockHandler, EntityHolderRebarBlock, DirectionalRebarBlock, TickingRebarBlock, FaultyLamp {
 
     companion object {
         private val IS_LIT_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "is_lit")
@@ -233,7 +233,7 @@ class BarLampBlock(
     }
 
     @MultiHandler(priorities = [EventPriority.NORMAL, EventPriority.MONITOR])
-    override fun onInteract(event: PlayerInteractEvent, priority: EventPriority) {
+    override fun onInteractedWith(event: PlayerInteractEvent, priority: EventPriority) {
         if (!event.action.isRightClick
             || event.hand != EquipmentSlot.HAND
             || event.useInteractedBlock() == Event.Result.DENY) {
@@ -283,14 +283,14 @@ class BarLampBlock(
         )
     }
 
-    override fun onBreak(drops: MutableList<ItemStack>, context: io.github.pylonmc.rebar.block.context.BlockBreakContext) {
+    override fun onPreBlockBreak(context: io.github.pylonmc.rebar.block.context.BlockBreakContext): Boolean {
         tryRemoveAllEntities()
+        return true
+    }
+
+    override fun getDropItem(context: io.github.pylonmc.rebar.block.context.BlockBreakContext): ItemStack? {
         val itemStack = defaultItem?.getItemStack()
-        if (itemStack != null) {
-            drops.add(itemStack)
-        } else {
-            drops.add(ItemStack(Material.STRUCTURE_VOID))
-        }
+        return itemStack ?: ItemStack(Material.STRUCTURE_VOID)
     }
     
     override fun tick() {
@@ -299,11 +299,13 @@ class BarLampBlock(
     }
     
     override fun getWaila(player: Player): WailaDisplay? {
+        val display = WailaDisplay.of(this, player)
         val status = when {
             isFaulty -> Component.translatable("rebarillumination.message.lamp.faulty_mode")
             isLit -> Component.translatable("rebarillumination.message.lamp.state_on")
             else -> Component.translatable("rebarillumination.message.lamp.state_off")
         }
-        return WailaDisplay(defaultWailaTranslationKey.arguments(RebarArgument.of("status", status)))
+        display.add(status)
+        return display
     }
 }

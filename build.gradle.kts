@@ -25,12 +25,10 @@ repositories {
 }
 
 val rebarVersion = project.properties["rebar.version"] as String
-val pylonVersion = project.properties["pylon.version"] as String
 
 dependencies {
     compileOnly("io.papermc.paper:paper-api:26.1.2.build.+")
     compileOnly("io.github.pylonmc:rebar:$rebarVersion")
-    compileOnly("io.github.pylonmc:pylon:$pylonVersion")
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
     compileOnly("org.jetbrains.kotlin:kotlin-reflect:2.3.0")
     compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
@@ -65,7 +63,7 @@ bukkit {
     main = project.properties["main-class"] as String
     version = project.version.toString()
     apiVersion = "26.1.2"
-    depend = listOf("Rebar", "Pylon")
+    depend = listOf("Rebar")
     load = BukkitPluginDescription.PluginLoadOrder.STARTUP
 }
 
@@ -77,7 +75,6 @@ tasks.runServer {
 
     downloadPlugins {
         github("pylonmc", "rebar", rebarVersion, "rebar-$rebarVersion.jar")
-        github("pylonmc", "pylon", pylonVersion, "pylon-$pylonVersion.jar")
     }
 
     maxHeapSize = "2G"

@@ -1,6 +1,6 @@
 package io.github.rebarillumination.block
 
-import io.github.pylonmc.rebar.config.Settings
+import io.github.pylonmc.rebar.config.ConfigSection
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter
 import io.github.pylonmc.rebar.item.RebarItem
 import io.github.rebarillumination.RebarIlluminationAddon
@@ -28,37 +28,44 @@ interface FaultyLamp {
     
     var isFaulty: Boolean
     var faultyEndTick: Long
+    
+    /**
+     * 获取展示实体的位置（默认使用方块中心，子类可重写）
+     */
+    fun getDisplayEntityLocation(): org.bukkit.Location {
+        return block.location.toCenterLocation()
+    }
 
     companion object {
         private val CONFIG_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "decoration_lamp")
         
         val lampFaultTickInterval: Int by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("lamp-fault-tick-interval", ConfigAdapter.INTEGER, 2)
         }
         
         private val FAULT_CHANCE: Double by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("fault-chance", ConfigAdapter.DOUBLE, 0.02)
         }
         
         private val MIN_FAULT_DURATION_INTERVALS: Int by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("min-fault-duration-intervals", ConfigAdapter.INTEGER, 1)
         }
         
         private val MAX_FAULT_DURATION_INTERVALS: Int by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("max-fault-duration-intervals", ConfigAdapter.INTEGER, 20)
         }
 
         val RIGHT_CLICK_FIX_CHANCE: Double by lazy {
-            Settings.get(CONFIG_KEY)
-                .get("right-click-fix-chance", ConfigAdapter.DOUBLE, 0.2)
+            ConfigSection.fromSettings(CONFIG_KEY)
+                .get("right-click-fix-chance", ConfigAdapter.DOUBLE, 0.05)
         }
 
         val RAINBOW_COLOR_CHANGE_INTERVAL: Int by lazy {
-            Settings.get(CONFIG_KEY)
+            ConfigSection.fromSettings(CONFIG_KEY)
                 .get("rainbow-color-change-interval", ConfigAdapter.INTEGER, 10)
         }
     }
@@ -104,6 +111,9 @@ interface FaultyLamp {
 
     fun tryRightClickFix(event: PlayerInteractEvent, priority: EventPriority): Boolean {
         if (!isFaulty || !event.action.isRightClick || event.hand != EquipmentSlot.HAND) return false
+        
+        val item = event.item
+        if (item != null && item.type != Material.AIR) return false
 
         if (priority == EventPriority.NORMAL) {
             event.setUseItemInHand(org.bukkit.event.Event.Result.DENY)
@@ -113,33 +123,29 @@ interface FaultyLamp {
         if (Random.nextDouble() <= RIGHT_CLICK_FIX_CHANCE) {
             disableFaultyMode(event.player)
         } else {
-            event.player.playSound(block.location, Sound.BLOCK_LEVER_CLICK, 0.5f, 0.5f)
+            val displayLoc = getDisplayEntityLocation()
+            event.player.playSound(displayLoc, Sound.BLOCK_ANVIL_LAND, 0.1f, 0.8f)
+            event.player.spawnParticle(
+                org.bukkit.Particle.SMOKE,
+                displayLoc,
+                5, 0.15, 0.15, 0.15, 0.05
+            )
         }
         return true
     }
     
     private fun enableFaultyMode(player: Player) {
         isFaulty = true
-        player.playSound(block.location, Sound.BLOCK_REDSTONE_TORCH_BURNOUT, 1.0f, 0.8f)
+        val displayLoc = getDisplayEntityLocation()
+        player.playSound(displayLoc, Sound.BLOCK_REDSTONE_TORCH_BURNOUT, 1.0f, 0.8f)
         
-        try {
-            val dustOptions = Class.forName("org.bukkit.Particle\$DustOptions")
-                .getConstructor(org.bukkit.Color::class.java, Float::class.java)
-                .newInstance(org.bukkit.Color.RED, 1.0f)
-            val particle = org.bukkit.Particle.valueOf("REDSTONE")
-            player.spawnParticle(
-                particle,
-                block.location.clone().add(0.5, 0.5, 0.5),
-                15, 0.3, 0.3, 0.3, 0.1,
-                dustOptions
-            )
-        } catch (e: Exception) {
-            player.spawnParticle(
-                org.bukkit.Particle.SMOKE,
-                block.location.clone().add(0.5, 0.5, 0.5),
-                15, 0.3, 0.3, 0.3, 0.1
-            )
-        }
+        val dustOptions = org.bukkit.Particle.DustOptions(org.bukkit.Color.RED, 1.0f)
+        player.spawnParticle(
+            org.bukkit.Particle.DUST,
+            displayLoc,
+            5, 0.15, 0.15, 0.15, 0.05,
+            dustOptions
+        )
         updateDisplayEntities()
     }
 
@@ -147,11 +153,12 @@ interface FaultyLamp {
         isFaulty = false
         faultyEndTick = 0
         
-        player.playSound(block.location, Sound.BLOCK_NOTE_BLOCK_CHIME, 1.0f, 1.2f)
+        val displayLoc = getDisplayEntityLocation()
+        player.playSound(displayLoc, Sound.BLOCK_NOTE_BLOCK_CHIME, 1.0f, 1.2f)
         player.spawnParticle(
-            org.bukkit.Particle.valueOf("VILLAGER_HAPPY"),
-            block.location.clone().add(0.5, 0.5, 0.5),
-            10, 0.3, 0.3, 0.3, 0.1
+            org.bukkit.Particle.HAPPY_VILLAGER,
+            displayLoc,
+            5, 0.15, 0.15, 0.15, 0.05
         )
         updateDisplayEntities()
     }
