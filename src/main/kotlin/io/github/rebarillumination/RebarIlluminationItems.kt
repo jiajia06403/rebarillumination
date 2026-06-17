@@ -55,8 +55,8 @@ object RebarIlluminationItems {
             RebarItem.register(PatchLampItem::class.java, patchLampTemplate, patchLampKey)
         }
 
-        // 注册荧石粉物品（不包括彩虹和无色）
-        LampColor.entries.filter { it.hasIllumar && it != LampColor.RAINBOW }.forEach { color ->
+        // 注册荧石粉物品（不包括无色）
+        LampColor.entries.filter { it.hasIllumar }.forEach { color ->
             val colorName = color.name.lowercase()
             val illumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_$colorName")
             val illumarTemplate = ItemStackBuilder.rebar(color.dyeMaterial, illumarKey).build()

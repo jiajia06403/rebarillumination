@@ -1,6 +1,7 @@
 package io.github.rebarillumination
 
 import io.github.pylonmc.rebar.recipe.vanilla.ShapedRecipeType
+import io.github.pylonmc.rebar.recipe.vanilla.ShapelessRecipeType
 import io.github.pylonmc.rebar.registry.RebarRegistry
 import io.github.rebarillumination.util.LampColor
 import org.bukkit.Material
@@ -47,22 +48,32 @@ object RebarIlluminationRecipes {
         val rainbowIllumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_rainbow")
         val schema = RebarRegistry.ITEMS[rainbowIllumarKey] ?: return
         val rainbowIllumarItem = schema.getItemStack()
+        rainbowIllumarItem.amount = 4
 
-        // 获取所有荧石粉物品（不包括彩虹和无色）
-        val allIllumarItems = LampColor.entries
-            .filter { it.hasIllumar && it != LampColor.RAINBOW }
-            .mapNotNull { color ->
-                val key = NamespacedKey(RebarIlluminationAddon.instance, "illumar_${color.name.lowercase()}")
-                RebarRegistry.ITEMS[key]?.getItemStack()
-            }
+        // 红橙黄绿青蓝紫 7 种颜色
+        val rainbowColors = listOf(
+            LampColor.RED,
+            LampColor.ORANGE,
+            LampColor.YELLOW,
+            LampColor.GREEN,
+            LampColor.CYAN,
+            LampColor.BLUE,
+            LampColor.PURPLE
+        )
 
-        if (allIllumarItems.size < 9) return
+        // 获取这7种颜色的荧石粉物品
+        val illumarItems = rainbowColors.mapNotNull { color ->
+            val key = NamespacedKey(RebarIlluminationAddon.instance, "illumar_${color.name.lowercase()}")
+            RebarRegistry.ITEMS[key]?.getItemStack()
+        }
 
-        val recipe = ShapedRecipe(rainbowIllumarKey, rainbowIllumarItem)
-            .shape("III", "III", "III")
-            .setIngredient('I', RecipeChoice.ExactChoice(allIllumarItems))
+        if (illumarItems.size < 7) return
 
-        ShapedRecipeType.addRecipe(recipe)
+        // 创建无序合成配方
+        val recipe = org.bukkit.inventory.ShapelessRecipe(rainbowIllumarKey, rainbowIllumarItem)
+        illumarItems.forEach { recipe.addIngredient(it) }
+
+        ShapelessRecipeType.addRecipe(recipe)
     }
 
     private fun registerLampRecipe(color: LampColor) {

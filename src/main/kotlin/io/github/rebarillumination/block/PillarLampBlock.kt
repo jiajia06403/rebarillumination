@@ -20,6 +20,9 @@ import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
+import io.github.pylonmc.rebar.util.delayTicks
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.bukkit.entity.ItemDisplay
 import org.bukkit.entity.Player
 import org.bukkit.event.Event
@@ -29,18 +32,16 @@ import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataContainer
 import org.bukkit.persistence.PersistentDataType
+import kotlin.random.Random
 
 class PillarLampBlock(
     block: Block,
     context: BlockCreateContext
-) : RebarBlock(block, context), InteractRebarBlockHandler, BlockBreakRebarBlockHandler, EntityHolderRebarBlock, DirectionalRebarBlock, TickingRebarBlock, FaultyLamp {
+) : RebarBlock(block, context), InteractRebarBlockHandler, BlockBreakRebarBlockHandler, EntityHolderRebarBlock, DirectionalRebarBlock, TickingRebarBlock, FaultyLamp, RainbowLamp {
 
     companion object {
         private val IS_LIT_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "is_lit")
         private val FACING_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "facing")
-        private val RAINBOW_INDEX_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "rainbow_index")
-        private val LAST_RAINBOW_CHANGE_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "last_rainbow_change")
-        private val NON_RAINBOW_COLORS by lazy { LampColor.getNonRainbowColors() }
     }
 
     override val isLit: Boolean
@@ -51,9 +52,10 @@ class PillarLampBlock(
     override var isFaulty: Boolean = false
     override var faultyEndTick: Long = 0L
     override var lampColor: LampColor = LampColor.WHITE
-    private var isRainbow: Boolean = false
-    private var rainbowColorIndex: Int = 0
-    private var lastRainbowChangeTick: Long = 0L
+    override var isRainbow: Boolean = false
+    override var lastRainbowColorIndex: Int = -1
+    
+    override var rainbowJob: kotlinx.coroutines.Job? = null
 
     @Suppress("unused")
     constructor(block: Block, pdc: PersistentDataContainer) : this(
@@ -64,8 +66,6 @@ class PillarLampBlock(
         facing = pdc.get(FACING_KEY, PersistentDataType.STRING)?.let { BlockFace.valueOf(it) } ?: BlockFace.UP
         isFaulty = pdc.get(IS_FAULTY_KEY, PersistentDataType.BOOLEAN) ?: false
         faultyEndTick = pdc.get(FAULTY_TICK_KEY, PersistentDataType.LONG) ?: 0L
-        rainbowColorIndex = pdc.get(RAINBOW_INDEX_KEY, PersistentDataType.INTEGER) ?: 0
-        lastRainbowChangeTick = pdc.get(LAST_RAINBOW_CHANGE_KEY, PersistentDataType.LONG) ?: 0L
     }
 
     override fun write(pdc: PersistentDataContainer) {
@@ -73,8 +73,6 @@ class PillarLampBlock(
         pdc.set(FACING_KEY, PersistentDataType.STRING, facing.name)
         pdc.set(IS_FAULTY_KEY, PersistentDataType.BOOLEAN, isFaulty)
         pdc.set(FAULTY_TICK_KEY, PersistentDataType.LONG, faultyEndTick)
-        pdc.set(RAINBOW_INDEX_KEY, PersistentDataType.INTEGER, rainbowColorIndex)
-        pdc.set(LAST_RAINBOW_CHANGE_KEY, PersistentDataType.LONG, lastRainbowChangeTick)
     }
 
     init {
@@ -91,7 +89,7 @@ class PillarLampBlock(
             createDisplayEntities()
         }
         if (isRainbow) {
-            updateRainbowDisplay()
+            startRainbowTask()
         }
     }
 
@@ -172,7 +170,7 @@ class PillarLampBlock(
         disableBlockTextureEntity = true
         updateDisplayEntities()
         if (isRainbow) {
-            updateRainbowDisplay()
+            updateRainbowDisplay(LampColor.WHITE)
         }
     }
 
@@ -186,21 +184,9 @@ class PillarLampBlock(
         lightDisplay?.setItemStack(ItemStack(displayMaterial))
     }
 
-    private fun updateRainbowDisplay() {
+    override fun updateRainbowDisplay(color: LampColor) {
         val shellDisplay = getHeldEntity(ItemDisplay::class.java, "shell")
-        val color = NON_RAINBOW_COLORS[rainbowColorIndex]
         shellDisplay?.setItemStack(ItemStack(color.stainedGlassMaterial))
-    }
-
-    private fun tickRainbow() {
-        if (!isRainbow) return
-        val currentTick = block.world.gameTime
-        val interval = FaultyLamp.RAINBOW_COLOR_CHANGE_INTERVAL
-        if (currentTick - lastRainbowChangeTick >= interval) {
-            rainbowColorIndex = (rainbowColorIndex + 1) % NON_RAINBOW_COLORS.size
-            lastRainbowChangeTick = currentTick
-            updateRainbowDisplay()
-        }
     }
 
     /**
@@ -274,6 +260,7 @@ class PillarLampBlock(
     }
 
     override fun onPreBlockBreak(context: io.github.pylonmc.rebar.block.context.BlockBreakContext): Boolean {
+        stopRainbowTask()
         tryRemoveAllEntities()
         return true
     }
@@ -285,7 +272,6 @@ class PillarLampBlock(
     
     override fun tick() {
         tickFaultyMode()
-        tickRainbow()
     }
     
     override fun getWaila(player: Player): WailaDisplay? {
