@@ -1,6 +1,6 @@
 lamp-fault-tick-interval: 1
 fault-chance: 0.05
-min-fault-duration-intervals: 1
-max-fault-duration-intervals: 10
+min-fault-duration: 1
+max-fault-duration: 10
 right-click-fix-chance: 0.05
 rainbow-color-change-interval: 10

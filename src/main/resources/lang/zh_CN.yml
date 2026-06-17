@@ -2,91 +2,96 @@ addon: "照明系统"
 
 item:
   illumar_white:
-    name: "白色荧光粉"
+    name: "白色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_orange:
-    name: "橙色荧光粉"
+    name: "橙色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_magenta:
-    name: "品红色荧光粉"
+    name: "品红色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_light_blue:
-    name: "浅蓝色荧光粉"
+    name: "浅蓝色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_yellow:
-    name: "黄色荧光粉"
+    name: "黄色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_lime:
-    name: "黄绿色荧光粉"
+    name: "黄绿色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_pink:
-    name: "粉色荧光粉"
+    name: "粉色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_gray:
-    name: "灰色荧光粉"
+    name: "灰色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_light_gray:
-    name: "浅灰色荧光粉"
+    name: "浅灰色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_cyan:
-    name: "青色荧光粉"
+    name: "青色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_purple:
-    name: "紫色荧光粉"
+    name: "紫色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_blue:
-    name: "蓝色荧光粉"
+    name: "蓝色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_brown:
-    name: "棕色荧光粉"
+    name: "棕色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_green:
-    name: "绿色荧光粉"
+    name: "绿色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_red:
-    name: "红色荧光粉"
+    name: "红色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_black:
-    name: "黑色荧光粉"
+    name: "黑色荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
   illumar_rainbow:
-    name: "彩虹荧光粉"
+    name: "彩虹荧石粉"
     lore: |-
       <arrow> 合成材料
       <arrow> 也可以解除灯的故障模式
 
+  lamp_colorless:
+    name: "无色灯"
+    lore:  |-
+      <arrow> 看起来容易被燧石敲坏
+      <arrow> <insn>潜行 + 右键点击</insn> 切换
   lamp_white:
     name: "白色灯"
     lore:  |-
@@ -173,6 +178,11 @@ item:
       <arrow> 看起来容易被燧石敲坏
       <arrow> <insn>潜行 + 右键点击</insn> 切换
 
+  pillar_lamp_colorless:
+    name: "无色柱状灯"
+    lore:  |-
+      <arrow> 看起来容易被燧石敲坏
+      <arrow> <insn>潜行 + 右键点击</insn> 切换
   pillar_lamp_white:
     name: "白色柱状灯"
     lore:  |-
@@ -259,6 +269,11 @@ item:
       <arrow> 看起来容易被燧石敲坏
       <arrow> <insn>潜行 + 右键点击</insn> 切换
 
+  sphere_lamp_colorless:
+    name: "无色球形灯"
+    lore:  |-
+      <arrow> 看起来容易被燧石敲坏
+      <arrow> <insn>潜行 + 右键点击</insn> 切换
   sphere_lamp_white:
     name: "白色球形灯"
     lore:  |-
@@ -345,6 +360,11 @@ item:
       <arrow> 看起来容易被燧石敲坏
       <arrow> <insn>潜行 + 右键点击</insn> 切换
 
+  patch_lamp_colorless:
+    name: "无色贴片灯"
+    lore:  |-
+      <arrow> 看起来容易被燧石敲坏
+      <arrow> <insn>潜行 + 右键点击</insn> 切换
   patch_lamp_white:
     name: "白色贴片灯"
     lore:  |-
@@ -431,6 +451,11 @@ item:
       <arrow> 看起来容易被燧石敲坏
       <arrow> <insn>潜行 + 右键点击</insn> 切换
 
+  bar_lamp_colorless:
+    name: "无色条状灯"
+    lore:  |-
+      <arrow> 看起来容易被燧石敲坏
+      <arrow> <insn>潜行 + 右键点击</insn> 切换
   bar_lamp_white:
     name: "白色条状灯"
     lore:  |-

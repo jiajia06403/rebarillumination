@@ -87,6 +87,11 @@ item:
       <arrow> Craft ingredients
       <arrow> Can also disable faulty mode on lamps
 
+  lamp_colorless:
+    name: "Colorless Lamp"
+    lore:  |-
+      <arrow> seem easy to be broken by a flint
+      <arrow> <insn>Sneak + Right Click</insn> to toggle
   lamp_white:
     name: "White Lamp"
     lore:  |-
@@ -173,6 +178,11 @@ item:
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
 
+  pillar_lamp_colorless:
+    name: "Colorless Pillar Lamp"
+    lore:  |-
+      <arrow> seem easy to be broken by a flint
+      <arrow> <insn>Sneak + Right Click</insn> to toggle
   pillar_lamp_white:
     name: "White Pillar Lamp"
     lore:  |-
@@ -259,6 +269,11 @@ item:
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
 
+  sphere_lamp_colorless:
+    name: "Colorless Sphere Lamp"
+    lore:  |-
+      <arrow> seem easy to be broken by a flint
+      <arrow> <insn>Sneak + Right Click</insn> to toggle
   sphere_lamp_white:
     name: "White Sphere Lamp"
     lore:  |-
@@ -345,6 +360,11 @@ item:
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
 
+  patch_lamp_colorless:
+    name: "Colorless Patch Lamp"
+    lore:  |-
+      <arrow> seem easy to be broken by a flint
+      <arrow> <insn>Sneak + Right Click</insn> to toggle
   patch_lamp_white:
     name: "White Patch Lamp"
     lore:  |-
@@ -431,6 +451,11 @@ item:
       <arrow> seem easy to be broken by a flint
       <arrow> <insn>Sneak + Right Click</insn> to toggle
 
+  bar_lamp_colorless:
+    name: "Colorless Bar Lamp"
+    lore:  |-
+      <arrow> seem easy to be broken by a flint
+      <arrow> <insn>Sneak + Right Click</insn> to toggle
   bar_lamp_white:
     name: "White Bar Lamp"
     lore:  |-

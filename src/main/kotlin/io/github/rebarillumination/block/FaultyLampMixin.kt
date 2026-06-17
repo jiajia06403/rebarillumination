@@ -49,14 +49,14 @@ interface FaultyLamp {
                 .get("fault-chance", ConfigAdapter.DOUBLE, 0.02)
         }
         
-        private val MIN_FAULT_DURATION_INTERVALS: Int by lazy {
+        private val MIN_FAULT_DURATION: Int by lazy {
             ConfigSection.fromSettings(CONFIG_KEY)
-                .get("min-fault-duration-intervals", ConfigAdapter.INTEGER, 1)
+                .get("min-fault-duration", ConfigAdapter.INTEGER, 1)
         }
         
-        private val MAX_FAULT_DURATION_INTERVALS: Int by lazy {
+        private val MAX_FAULT_DURATION: Int by lazy {
             ConfigSection.fromSettings(CONFIG_KEY)
-                .get("max-fault-duration-intervals", ConfigAdapter.INTEGER, 20)
+                .get("max-fault-duration", ConfigAdapter.INTEGER, 20)
         }
 
         val RIGHT_CLICK_FIX_CHANCE: Double by lazy {
@@ -177,8 +177,8 @@ interface FaultyLamp {
         }
         
         if (Random.nextDouble() <= FAULT_CHANCE) {
-            val durationIntervals = Random.nextInt(MIN_FAULT_DURATION_INTERVALS, MAX_FAULT_DURATION_INTERVALS + 1)
-            faultyEndTick = currentTick + durationIntervals * lampFaultTickInterval.toLong()
+            val duration = Random.nextInt(MIN_FAULT_DURATION, MAX_FAULT_DURATION + 1)
+            faultyEndTick = currentTick + duration * lampFaultTickInterval.toLong()
             updateDisplayEntities()
         }
     }

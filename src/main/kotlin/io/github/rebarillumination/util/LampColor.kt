@@ -4,7 +4,8 @@ import org.bukkit.Material
 
 enum class LampColor(
     val dyeMaterial: Material,
-    val stainedGlassMaterial: Material
+    val stainedGlassMaterial: Material,
+    val hasIllumar: Boolean = true
 ) {
     WHITE(Material.WHITE_DYE, Material.WHITE_STAINED_GLASS),
     ORANGE(Material.ORANGE_DYE, Material.ORANGE_STAINED_GLASS),
@@ -22,7 +23,8 @@ enum class LampColor(
     GREEN(Material.GREEN_DYE, Material.GREEN_STAINED_GLASS),
     RED(Material.RED_DYE, Material.RED_STAINED_GLASS),
     BLACK(Material.BLACK_DYE, Material.BLACK_STAINED_GLASS),
-    RAINBOW(Material.WHITE_DYE, Material.WHITE_STAINED_GLASS);
+    RAINBOW(Material.WHITE_DYE, Material.WHITE_STAINED_GLASS),
+    COLORLESS(Material.GLOWSTONE_DUST, Material.GLASS, false);
 
     companion object {
         fun fromName(name: String): LampColor {
@@ -31,6 +33,10 @@ enum class LampColor(
 
         fun getNonRainbowColors(): List<LampColor> {
             return entries.filter { it != RAINBOW }
+        }
+
+        fun getLampColors(): List<LampColor> {
+            return entries.toList()
         }
     }
 }
