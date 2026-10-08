@@ -15,8 +15,8 @@ class RebarIlluminationAddon : JavaPlugin(), RebarAddon {
     override val javaPlugin: JavaPlugin
         get() = this
 
-    override val languages: Set<Locale>
-        get() = setOf(Locale.ENGLISH, Locale.SIMPLIFIED_CHINESE)
+    override val defaultLanguage: Locale
+        get() = Locale.ENGLISH
 
     override val material: Material
         get() = Material.REDSTONE_LAMP

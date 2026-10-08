@@ -295,7 +295,7 @@ class BarLampBlock(
     }
 
     override fun getDropItem(context: io.github.pylonmc.rebar.block.context.BlockBreakContext): ItemStack? {
-        val itemStack = defaultItem?.getItemStack()
+        val itemStack = defaultItem?.createNewItemStack()
         return itemStack ?: ItemStack(Material.STRUCTURE_VOID)
     }
     

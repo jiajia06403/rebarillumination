@@ -1,7 +1,0 @@
-name: RebarIllumination
-version: 1.0.2
-main: io.github.rebarillumination.RebarIlluminationAddon
-load: STARTUP
-depend:
-  - Rebar
-api-version: 26.1.2

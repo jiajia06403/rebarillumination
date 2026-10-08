@@ -184,7 +184,7 @@ class LampBlock(
     }
 
     override fun getDropItem(context: io.github.pylonmc.rebar.block.context.BlockBreakContext): ItemStack? {
-        val itemStack = defaultItem?.getItemStack()
+        val itemStack = defaultItem?.createNewItemStack()
         return itemStack ?: ItemStack(if (isRainbow) Material.WHITE_STAINED_GLASS else lampColor.stainedGlassMaterial)
     }
     

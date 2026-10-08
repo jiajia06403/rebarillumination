@@ -2,6 +2,8 @@ package io.github.rebarillumination
 
 import io.github.pylonmc.rebar.recipe.vanilla.ShapedRecipeType
 import io.github.pylonmc.rebar.recipe.vanilla.ShapelessRecipeType
+import io.github.pylonmc.rebar.recipe.vanilla.ShapedRebarRecipe
+import io.github.pylonmc.rebar.recipe.vanilla.ShapelessRebarRecipe
 import io.github.pylonmc.rebar.registry.RebarRegistry
 import io.github.rebarillumination.util.LampColor
 import org.bukkit.Material
@@ -33,7 +35,7 @@ object RebarIlluminationRecipes {
     private fun registerIllumarRecipe(color: LampColor) {
         val illumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_${color.name.lowercase()}")
         val schema = RebarRegistry.ITEMS[illumarKey] ?: return
-        val illumarItem = schema.getItemStack()
+        val illumarItem = schema.createNewItemStack()
         illumarItem.amount = 8
 
         val recipe = ShapedRecipe(illumarKey, illumarItem)
@@ -41,13 +43,13 @@ object RebarIlluminationRecipes {
             .setIngredient('G', Material.GLOWSTONE_DUST)
             .setIngredient('D', color.dyeMaterial)
 
-        ShapedRecipeType.addRecipe(recipe)
+        ShapedRecipeType.addRecipe(ShapedRebarRecipe.fromVanilla(recipe))
     }
 
     private fun registerRainbowIllumarRecipe() {
         val rainbowIllumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_rainbow")
         val schema = RebarRegistry.ITEMS[rainbowIllumarKey] ?: return
-        val rainbowIllumarItem = schema.getItemStack()
+        val rainbowIllumarItem = schema.createNewItemStack()
         rainbowIllumarItem.amount = 4
 
         // 红橙黄绿青蓝紫 7 种颜色
@@ -64,7 +66,7 @@ object RebarIlluminationRecipes {
         // 获取这7种颜色的荧石粉物品
         val illumarItems = rainbowColors.mapNotNull { color ->
             val key = NamespacedKey(RebarIlluminationAddon.instance, "illumar_${color.name.lowercase()}")
-            RebarRegistry.ITEMS[key]?.getItemStack()
+            RebarRegistry.ITEMS[key]?.createNewItemStack()
         }
 
         if (illumarItems.size < 7) return
@@ -73,20 +75,20 @@ object RebarIlluminationRecipes {
         val recipe = org.bukkit.inventory.ShapelessRecipe(rainbowIllumarKey, rainbowIllumarItem)
         illumarItems.forEach { recipe.addIngredient(it) }
 
-        ShapelessRecipeType.addRecipe(recipe)
+        ShapelessRecipeType.addRecipe(ShapelessRebarRecipe.fromVanilla(recipe))
     }
 
     private fun registerLampRecipe(color: LampColor) {
         val colorName = color.name.lowercase()
         val lampKey = NamespacedKey(RebarIlluminationAddon.instance, "lamp_$colorName")
         val schema = RebarRegistry.ITEMS[lampKey] ?: return
-        val lampItem = schema.getItemStack()
+        val lampItem = schema.createNewItemStack()
 
         val recipe = if (color.hasIllumar) {
             // 有荧石粉的颜色：使用荧石粉
             val illumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_$colorName")
             val illumarSchema = RebarRegistry.ITEMS[illumarKey] ?: return
-            val illumarItem = illumarSchema.getItemStack()
+            val illumarItem = illumarSchema.createNewItemStack()
 
             ShapedRecipe(lampKey, lampItem)
                 .shape("NNN", "NIN", "NNN")
@@ -108,19 +110,19 @@ object RebarIlluminationRecipes {
                 ))
         }
 
-        ShapedRecipeType.addRecipe(recipe)
+        ShapedRecipeType.addRecipe(ShapedRebarRecipe.fromVanilla(recipe))
     }
 
     private fun registerPillarLampRecipe(color: LampColor) {
         val colorName = color.name.lowercase()
         val pillarLampKey = NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_$colorName")
         val schema = RebarRegistry.ITEMS[pillarLampKey] ?: return
-        val pillarLampItem = schema.getItemStack()
+        val pillarLampItem = schema.createNewItemStack()
 
         val recipe = if (color.hasIllumar) {
             val illumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_$colorName")
             val illumarSchema = RebarRegistry.ITEMS[illumarKey] ?: return
-            val illumarItem = illumarSchema.getItemStack()
+            val illumarItem = illumarSchema.createNewItemStack()
 
             ShapedRecipe(pillarLampKey, pillarLampItem)
                 .shape(" N ", " I ", " N ")
@@ -141,19 +143,19 @@ object RebarIlluminationRecipes {
                 ))
         }
 
-        ShapedRecipeType.addRecipe(recipe)
+        ShapedRecipeType.addRecipe(ShapedRebarRecipe.fromVanilla(recipe))
     }
 
     private fun registerBarLampRecipe(color: LampColor) {
         val colorName = color.name.lowercase()
         val barLampKey = NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_$colorName")
         val schema = RebarRegistry.ITEMS[barLampKey] ?: return
-        val barLampItem = schema.getItemStack()
+        val barLampItem = schema.createNewItemStack()
 
         val recipe = if (color.hasIllumar) {
             val illumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_$colorName")
             val illumarSchema = RebarRegistry.ITEMS[illumarKey] ?: return
-            val illumarItem = illumarSchema.getItemStack()
+            val illumarItem = illumarSchema.createNewItemStack()
 
             ShapedRecipe(barLampKey, barLampItem)
                 .shape("NIN")
@@ -174,19 +176,19 @@ object RebarIlluminationRecipes {
                 ))
         }
 
-        ShapedRecipeType.addRecipe(recipe)
+        ShapedRecipeType.addRecipe(ShapedRebarRecipe.fromVanilla(recipe))
     }
 
     private fun registerSphereLampRecipe(color: LampColor) {
         val colorName = color.name.lowercase()
         val sphereLampKey = NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$colorName")
         val schema = RebarRegistry.ITEMS[sphereLampKey] ?: return
-        val sphereLampItem = schema.getItemStack()
+        val sphereLampItem = schema.createNewItemStack()
 
         val recipe = if (color.hasIllumar) {
             val illumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_$colorName")
             val illumarSchema = RebarRegistry.ITEMS[illumarKey] ?: return
-            val illumarItem = illumarSchema.getItemStack()
+            val illumarItem = illumarSchema.createNewItemStack()
 
             ShapedRecipe(sphereLampKey, sphereLampItem)
                 .shape(" N ", "NIN", " N ")
@@ -207,19 +209,19 @@ object RebarIlluminationRecipes {
                 ))
         }
 
-        ShapedRecipeType.addRecipe(recipe)
+        ShapedRecipeType.addRecipe(ShapedRebarRecipe.fromVanilla(recipe))
     }
 
     private fun registerWallLampRecipe(color: LampColor) {
         val colorName = color.name.lowercase()
         val wallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$colorName")
         val schema = RebarRegistry.ITEMS[wallLampKey] ?: return
-        val wallLampItem = schema.getItemStack()
+        val wallLampItem = schema.createNewItemStack()
 
         if (color.hasIllumar) {
             val illumarKey = NamespacedKey(RebarIlluminationAddon.instance, "illumar_$colorName")
             val illumarSchema = RebarRegistry.ITEMS[illumarKey] ?: return
-            val illumarItem = illumarSchema.getItemStack()
+            val illumarItem = illumarSchema.createNewItemStack()
 
             // 有序配方：3个任意粒 + 1个荧石粉
             val recipe = ShapedRecipe(NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_${colorName}_top"), wallLampItem.clone())
@@ -230,7 +232,7 @@ object RebarIlluminationRecipes {
                     Material.GOLD_NUGGET,
                     Material.COPPER_NUGGET
                 ))
-            ShapedRecipeType.addRecipe(recipe)
+            ShapedRecipeType.addRecipe(ShapedRebarRecipe.fromVanilla(recipe))
 
             val recipeTop = ShapedRecipe(NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_${colorName}_center"), wallLampItem.clone())
                 .shape(" I ", "NNN")
@@ -251,7 +253,7 @@ object RebarIlluminationRecipes {
                     Material.GOLD_NUGGET,
                     Material.COPPER_NUGGET
                 ))
-            ShapedRecipeType.addRecipe(recipe)
+            ShapedRecipeType.addRecipe(ShapedRebarRecipe.fromVanilla(recipe))
 
             val recipeTop = ShapedRecipe(NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_${colorName}_center"), wallLampItem.clone())
                 .shape(" G ", "NNN")

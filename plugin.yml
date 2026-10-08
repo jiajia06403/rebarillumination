@@ -4,4 +4,4 @@ main: io.github.rebarillumination.RebarIlluminationAddon
 load: STARTUP
 depend:
   - Rebar
-api-version: 26.1.2
+api-version: 26.2

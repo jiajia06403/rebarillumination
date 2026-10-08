@@ -35,12 +35,12 @@ object RebarIlluminationGuide {
             val sphereLampKey = NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$colorName")
             val wallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$colorName")
 
-            RebarRegistry.ITEMS[illumarKey]?.getItemStack()?.let { illumarPage.addItem(it) }
-            RebarRegistry.ITEMS[lampKey]?.getItemStack()?.let { lampsPage.addItem(it) }
-            RebarRegistry.ITEMS[pillarLampKey]?.getItemStack()?.let { pillarLampsPage.addItem(it) }
-            RebarRegistry.ITEMS[barLampKey]?.getItemStack()?.let { barLampsPage.addItem(it) }
-            RebarRegistry.ITEMS[sphereLampKey]?.getItemStack()?.let { sphereLampsPage.addItem(it) }
-            RebarRegistry.ITEMS[wallLampKey]?.getItemStack()?.let { wallLampsPage.addItem(it) }
+            RebarRegistry.ITEMS[illumarKey]?.createNewItemStack()?.let { illumarPage.addItem(it) }
+            RebarRegistry.ITEMS[lampKey]?.createNewItemStack()?.let { lampsPage.addItem(it) }
+            RebarRegistry.ITEMS[pillarLampKey]?.createNewItemStack()?.let { pillarLampsPage.addItem(it) }
+            RebarRegistry.ITEMS[barLampKey]?.createNewItemStack()?.let { barLampsPage.addItem(it) }
+            RebarRegistry.ITEMS[sphereLampKey]?.createNewItemStack()?.let { sphereLampsPage.addItem(it) }
+            RebarRegistry.ITEMS[wallLampKey]?.createNewItemStack()?.let { wallLampsPage.addItem(it) }
         }
 
         val rainbowKey = "rainbow"
@@ -51,12 +51,12 @@ object RebarIlluminationGuide {
         val rainbowSphereLampKey = NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$rainbowKey")
         val rainbowWallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$rainbowKey")
 
-        RebarRegistry.ITEMS[rainbowIllumarKey]?.getItemStack()?.let { illumarPage.addItem(it) }
-        RebarRegistry.ITEMS[rainbowLampKey]?.getItemStack()?.let { lampsPage.addItem(it) }
-        RebarRegistry.ITEMS[rainbowPillarLampKey]?.getItemStack()?.let { pillarLampsPage.addItem(it) }
-        RebarRegistry.ITEMS[rainbowBarLampKey]?.getItemStack()?.let { barLampsPage.addItem(it) }
-        RebarRegistry.ITEMS[rainbowSphereLampKey]?.getItemStack()?.let { sphereLampsPage.addItem(it) }
-        RebarRegistry.ITEMS[rainbowWallLampKey]?.getItemStack()?.let { wallLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowIllumarKey]?.createNewItemStack()?.let { illumarPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowLampKey]?.createNewItemStack()?.let { lampsPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowPillarLampKey]?.createNewItemStack()?.let { pillarLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowBarLampKey]?.createNewItemStack()?.let { barLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowSphereLampKey]?.createNewItemStack()?.let { sphereLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[rainbowWallLampKey]?.createNewItemStack()?.let { wallLampsPage.addItem(it) }
 
         val colorlessKey = "colorless"
         val colorlessLampKey = NamespacedKey(RebarIlluminationAddon.instance, "lamp_$colorlessKey")
@@ -65,11 +65,11 @@ object RebarIlluminationGuide {
         val colorlessSphereLampKey = NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$colorlessKey")
         val colorlessWallLampKey = NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$colorlessKey")
 
-        RebarRegistry.ITEMS[colorlessLampKey]?.getItemStack()?.let { lampsPage.addItem(it) }
-        RebarRegistry.ITEMS[colorlessPillarLampKey]?.getItemStack()?.let { pillarLampsPage.addItem(it) }
-        RebarRegistry.ITEMS[colorlessBarLampKey]?.getItemStack()?.let { barLampsPage.addItem(it) }
-        RebarRegistry.ITEMS[colorlessSphereLampKey]?.getItemStack()?.let { sphereLampsPage.addItem(it) }
-        RebarRegistry.ITEMS[colorlessWallLampKey]?.getItemStack()?.let { wallLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[colorlessLampKey]?.createNewItemStack()?.let { lampsPage.addItem(it) }
+        RebarRegistry.ITEMS[colorlessPillarLampKey]?.createNewItemStack()?.let { pillarLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[colorlessBarLampKey]?.createNewItemStack()?.let { barLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[colorlessSphereLampKey]?.createNewItemStack()?.let { sphereLampsPage.addItem(it) }
+        RebarRegistry.ITEMS[colorlessWallLampKey]?.createNewItemStack()?.let { wallLampsPage.addItem(it) }
 
         illuminationRoot.addPage(Material.GLOWSTONE_DUST, illumarPage)
         illuminationRoot.addPage(Material.SEA_LANTERN, lampsPage)
