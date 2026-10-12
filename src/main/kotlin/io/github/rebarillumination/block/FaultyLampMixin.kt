@@ -3,6 +3,7 @@ package io.github.rebarillumination.block
 import io.github.pylonmc.rebar.config.ConfigSection
 import io.github.pylonmc.rebar.config.adapter.ConfigAdapter
 import io.github.pylonmc.rebar.item.RebarItem
+import io.github.rebarillumination.LampKeys
 import io.github.rebarillumination.RebarIlluminationAddon
 import io.github.rebarillumination.util.LampColor
 import org.bukkit.Material
@@ -36,6 +37,17 @@ interface FaultyLamp {
         return block.location.toCenterLocation()
     }
 
+    /**
+     * 故障/修复粒子的扩散半径。默认与重构前一致（0.15）；方块灯等实心方块可重写放大，
+     * 使粒子逸出方块边界而可见。生成中心始终为 [getDisplayEntityLocation]（方块中心）。
+     */
+    val faultParticleSpread: Double get() = 0.15
+
+    /**
+     * 故障/修复粒子的数量。默认与重构前一致（5）。
+     */
+    val faultParticleCount: Int get() = 5
+
     companion object {
         private val CONFIG_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "decoration_lamp")
         
@@ -63,11 +75,6 @@ interface FaultyLamp {
             ConfigSection.fromSettings(CONFIG_KEY)
                 .get("right-click-fix-chance", ConfigAdapter.DOUBLE, 0.05)
         }
-
-        val RAINBOW_COLOR_CHANGE_INTERVAL: Int by lazy {
-            ConfigSection.fromSettings(CONFIG_KEY)
-                .get("rainbow-color-change-interval", ConfigAdapter.INTEGER, 10)
-        }
     }
     
     fun handleFaultyModeInteraction(event: PlayerInteractEvent, priority: EventPriority) {
@@ -94,7 +101,7 @@ interface FaultyLamp {
             val keyName = itemKey.key
             
             for (color in LampColor.entries) {
-                if (keyName == "illumar_${color.name.lowercase()}") {
+                if (keyName == LampKeys.illumarKey(color).key) {
                     if (color != lampColor) {
                         return
                     }
@@ -127,8 +134,8 @@ interface FaultyLamp {
             event.player.playSound(displayLoc, Sound.BLOCK_ANVIL_LAND, 0.1f, 0.8f)
             event.player.spawnParticle(
                 org.bukkit.Particle.SMOKE,
-                displayLoc,
-                5, 0.15, 0.15, 0.15, 0.05
+                getDisplayEntityLocation(),
+                faultParticleCount, faultParticleSpread, faultParticleSpread, faultParticleSpread, 0.05
             )
         }
         return true
@@ -142,8 +149,8 @@ interface FaultyLamp {
         val dustOptions = org.bukkit.Particle.DustOptions(org.bukkit.Color.RED, 1.0f)
         player.spawnParticle(
             org.bukkit.Particle.DUST,
-            displayLoc,
-            5, 0.15, 0.15, 0.15, 0.05,
+            getDisplayEntityLocation(),
+            faultParticleCount, faultParticleSpread, faultParticleSpread, faultParticleSpread, 0.05,
             dustOptions
         )
         updateDisplayEntities()
@@ -157,8 +164,8 @@ interface FaultyLamp {
         player.playSound(displayLoc, Sound.BLOCK_NOTE_BLOCK_CHIME, 1.0f, 1.2f)
         player.spawnParticle(
             org.bukkit.Particle.HAPPY_VILLAGER,
-            displayLoc,
-            5, 0.15, 0.15, 0.15, 0.05
+            getDisplayEntityLocation(),
+            faultParticleCount, faultParticleSpread, faultParticleSpread, faultParticleSpread, 0.05
         )
         updateDisplayEntities()
     }

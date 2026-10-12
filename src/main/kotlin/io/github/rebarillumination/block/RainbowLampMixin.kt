@@ -79,10 +79,4 @@ interface RainbowLamp {
         rainbowJob?.cancel()
         rainbowJob = null
     }
-    
-    fun getRainbowColorForTick(tick: Long): LampColor {
-        val interval = RAINBOW_COLOR_CHANGE_INTERVAL
-        val colorIndex = ((tick / interval) % RAINBOW_COLORS.size).toInt()
-        return RAINBOW_COLORS[colorIndex]
-    }
 }

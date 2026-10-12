@@ -1,9 +1,8 @@
 package io.github.rebarillumination
 
-import io.github.pylonmc.rebar.item.RebarItem
 import io.github.pylonmc.rebar.item.builder.ItemStackBuilder
 import io.github.pylonmc.rebar.item.research.Research
-import io.github.pylonmc.rebar.registry.RebarRegistry
+import io.github.rebarillumination.util.LampColor
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.NamespacedKey
@@ -11,33 +10,23 @@ import org.bukkit.NamespacedKey
 object RebarIlluminationResearch {
 
     fun initialize() {
-        val colors = listOf(
-            "white", "orange", "magenta", "light_blue", "yellow", "lime", "pink", "gray",
-            "light_gray", "cyan", "purple", "blue", "brown", "green", "red", "black"
-        )
-
         val unlocks = mutableSetOf<NamespacedKey>()
-        
-        colors.forEach { color ->
-            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "illumar_$color"))
-            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "lamp_$color"))
-            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_$color"))
-            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_$color"))
-            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$color"))
-            unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$color"))
-        }
 
-        val rainbow = "rainbow"
-        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "illumar_$rainbow"))
-        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "lamp_$rainbow"))
-        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "bar_lamp_$rainbow"))
-        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "pillar_lamp_$rainbow"))
-        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "sphere_lamp_$rainbow"))
-        unlocks.add(NamespacedKey(RebarIlluminationAddon.instance, "patch_lamp_$rainbow"))
+        // 16 种标准颜色（不含彩虹与无色）各自的荧石粉与五种灯。
+        LampColor.entries
+            .filter { it != LampColor.RAINBOW && it != LampColor.COLORLESS }
+            .forEach { color ->
+                unlocks.add(LampKeys.illumarKey(color))
+                LampShape.entries.forEach { shape -> unlocks.add(shape.blockKey(color)) }
+            }
+
+        // 彩虹系列。
+        unlocks.add(LampKeys.illumarKey(LampColor.RAINBOW))
+        LampShape.entries.forEach { shape -> unlocks.add(shape.blockKey(LampColor.RAINBOW)) }
 
         val researchKey = NamespacedKey(RebarIlluminationAddon.instance, "illumination")
         val icon = ItemStackBuilder.rebar(Material.GLOWSTONE_DUST, researchKey).build()
-        
+
         val research = Research(
             key = researchKey,
             itemTemplate = icon,
@@ -45,7 +34,7 @@ object RebarIlluminationResearch {
             cost = 50,
             unlocks = unlocks
         )
-        
+
         research.register()
     }
 }

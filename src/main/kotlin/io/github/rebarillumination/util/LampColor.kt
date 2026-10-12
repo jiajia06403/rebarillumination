@@ -27,16 +27,13 @@ enum class LampColor(
     COLORLESS(Material.GLOWSTONE_DUST, Material.GLASS, false);
 
     companion object {
+        /**
+         * 依据颜色名（忽略大小写，例如 `"white"` / `"RAINBOW"`）查找对应枚举。
+         * 找不到时回退到 [WHITE]——历史上用于解析方块注册 key，找不到通常意味着 key 异常，
+         * 保留回退以免加载旧存档时崩溃。
+         */
         fun fromName(name: String): LampColor {
             return entries.find { it.name.equals(name, ignoreCase = true) } ?: WHITE
-        }
-
-        fun getNonRainbowColors(): List<LampColor> {
-            return entries.filter { it != RAINBOW }
-        }
-
-        fun getLampColors(): List<LampColor> {
-            return entries.toList()
         }
     }
 }

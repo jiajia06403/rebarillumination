@@ -1,205 +1,52 @@
 package io.github.rebarillumination.block
 
-import io.github.pylonmc.rebar.block.RebarBlock
-import io.github.pylonmc.rebar.block.interfaces.BlockBreakRebarBlockHandler
-import io.github.pylonmc.rebar.block.interfaces.DirectionalRebarBlock
-import io.github.pylonmc.rebar.block.interfaces.EntityHolderRebarBlock
-import io.github.pylonmc.rebar.block.interfaces.InteractRebarBlockHandler
-import io.github.pylonmc.rebar.block.interfaces.TickingRebarBlock
 import io.github.pylonmc.rebar.block.context.BlockCreateContext
 import io.github.pylonmc.rebar.entity.display.ItemDisplayBuilder
 import io.github.pylonmc.rebar.entity.display.transform.TransformBuilder
-import io.github.pylonmc.rebar.event.api.annotation.MultiHandler
-import io.github.pylonmc.rebar.waila.WailaDisplay
-import io.github.pylonmc.rebar.i18n.RebarArgument
-import io.github.rebarillumination.RebarIlluminationAddon
+import io.github.rebarillumination.LampShape
 import io.github.rebarillumination.util.LampColor
-import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Material
-import org.bukkit.Sound
 import org.bukkit.block.Block
 import org.bukkit.block.BlockFace
-import io.github.pylonmc.rebar.util.delayTicks
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import org.bukkit.entity.ItemDisplay
-import org.bukkit.entity.Player
-import org.bukkit.event.Event
-import org.bukkit.event.EventPriority
-import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.inventory.ItemStack
 import org.bukkit.persistence.PersistentDataContainer
-import org.bukkit.persistence.PersistentDataType
-import kotlin.random.Random
 
+/**
+ * 普通灯：方块本身即为染色玻璃（使用真实方块材质），无需贴片展示实体。
+ * 仅叠加一个略小的光源实体；彩虹模式下直接改变方块类型。
+ */
 class LampBlock(
     block: Block,
     context: BlockCreateContext
-) : RebarBlock(block, context), InteractRebarBlockHandler, BlockBreakRebarBlockHandler, EntityHolderRebarBlock, TickingRebarBlock, FaultyLamp, DirectionalRebarBlock, RainbowLamp {
+) : AbstractLampBlock(block, context, LampShape.LAMP) {
 
-    companion object {
-        private val IS_LIT_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "is_lit")
-        private val COLOR_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "color")
-        private val FACING_KEY = org.bukkit.NamespacedKey(RebarIlluminationAddon.instance, "facing")
-    }
+    override val usesBlockTexture: Boolean = true
+    override val primaryEntityName: String = "light"
+    override val fallbackDropMaterial: Material
+        get() = if (isRainbow) Material.WHITE_STAINED_GLASS else lampColor.stainedGlassMaterial
 
-    override val isLit: Boolean
-        get() = _isLit
-    private var _isLit: Boolean = true
-    override var lampColor: LampColor = LampColor.WHITE
-    override var facing: BlockFace = context.facingVertical
-    override var isFaulty: Boolean = false
-    override var faultyEndTick: Long = 0L
-    override var isRainbow: Boolean = false
-    override var lastRainbowColorIndex: Int = -1
-    
-    override var rainbowJob: kotlinx.coroutines.Job? = null
+    // 方块灯是实心染色玻璃，粒子锚点在方块中心（会被方块遮挡），故放大扩散半径与数量，
+    // 让粒子逸出方块边界而可见；中心仍是方块中心，不抬到方块上方。
+    override val faultParticleSpread: Double = 0.8
+    override val faultParticleCount: Int = 12
 
     @Suppress("unused")
     constructor(block: Block, pdc: PersistentDataContainer) : this(
         block,
         BlockCreateContext.Default(block = block, facing = BlockFace.UP, facingVertical = BlockFace.UP)
     ) {
-        _isLit = pdc.get(IS_LIT_KEY, PersistentDataType.BOOLEAN) ?: true
-        val colorName = pdc.get(COLOR_KEY, PersistentDataType.STRING) ?: "white"
-        lampColor = LampColor.fromName(colorName)
-        facing = pdc.get(FACING_KEY, PersistentDataType.STRING)?.let { BlockFace.valueOf(it) } ?: BlockFace.UP
-        isFaulty = pdc.get(IS_FAULTY_KEY, PersistentDataType.BOOLEAN) ?: false
-        faultyEndTick = pdc.get(FAULTY_TICK_KEY, PersistentDataType.LONG) ?: 0L
+        readState(pdc)
     }
 
-    override fun write(pdc: PersistentDataContainer) {
-        pdc.set(IS_LIT_KEY, PersistentDataType.BOOLEAN, isLit)
-        pdc.set(COLOR_KEY, PersistentDataType.STRING, lampColor.name.lowercase())
-        pdc.set(FACING_KEY, PersistentDataType.STRING, facing.name)
-        pdc.set(IS_FAULTY_KEY, PersistentDataType.BOOLEAN, isFaulty)
-        pdc.set(FAULTY_TICK_KEY, PersistentDataType.LONG, faultyEndTick)
-    }
-
-    init {
-        // 在方块类型改变前获取并保存颜色
-        val keyStr = key.key
-        val colorName = keyStr.removePrefix("lamp_")
-        lampColor = LampColor.fromName(colorName)
-        isRainbow = colorName == "rainbow"
-        setTickInterval(FaultyLamp.lampFaultTickInterval)
-    }
-
-    override fun postInitialise() {
-        // 只在实体不存在时创建，避免加载时重复创建
-        if (!isHeldEntityPresent("light")) {
-            createDisplayEntity()
-        }
-        if (isRainbow) {
-            startRainbowTask()
-        }
-    }
-
-    /**
-     * 创建展示实体（只在 create constructor 中调用）
-     */
-    private fun createDisplayEntity() {
-        // 基础方块已是彩色玻璃，创建光源展示实体（略小于本体防止z-fighting）
+    override fun spawnDisplayEntities() {
+        // 基础方块已是彩色玻璃，仅叠加一个略小的光源展示实体（防止 z-fighting）。
         addEntity("light", ItemDisplayBuilder()
             .itemStack(ItemStack(if (isLit) Material.SEA_LANTERN else Material.NETHERITE_BLOCK))
             .transformation(TransformBuilder().scale(0.999f).buildForItemDisplay())
-            .build(block.location.toCenterLocation()))
-    }
-
-    override fun postLoad() {
-        updateDisplayEntities()
-        if (isRainbow) {
-            updateRainbowDisplay(LampColor.WHITE)
-        }
-    }
-
-    override fun updateDisplayEntities() {
-        val lightDisplay = getHeldEntity(ItemDisplay::class.java, "light")
-        val displayMaterial = when {
-            !_isLit -> Material.NETHERITE_BLOCK
-            isCurrentlyFaulty() -> Material.REDSTONE_BLOCK
-            else -> Material.SEA_LANTERN
-        }
-        lightDisplay?.setItemStack(ItemStack(displayMaterial))
+            .build(getDisplayEntityLocation()))
     }
 
     override fun updateRainbowDisplay(color: LampColor) {
         block.type = color.stainedGlassMaterial
-    }
-
-    @MultiHandler(priorities = [EventPriority.NORMAL, EventPriority.MONITOR])
-    override fun onInteractedWith(event: PlayerInteractEvent, priority: EventPriority) {
-        if (!event.action.isRightClick
-            || event.hand != EquipmentSlot.HAND
-            || event.useInteractedBlock() == Event.Result.DENY) {
-            return
-        }
-
-        // 如果在故障模式下
-        if (isFaulty) {
-            if (event.player.isSneaking) {
-                // 故障模式下禁止切换灯
-                if (priority == EventPriority.NORMAL) {
-                    event.setUseItemInHand(Event.Result.DENY)
-                }
-                return
-            }
-            // 尝试右键修复
-            if (tryRightClickFix(event, priority)) {
-                return
-            }
-        }
-
-        if (event.player.isSneaking) {
-            if (priority == EventPriority.NORMAL) {
-                event.setUseItemInHand(Event.Result.DENY)
-                return
-            }
-            toggleLight(event.player)
-            return
-        }
-
-        handleFaultyModeInteraction(event, priority)
-    }
-
-    private fun toggleLight(player: Player) {
-        val previousLit = _isLit
-        _isLit = !_isLit
-        updateDisplayEntities()
-
-        // 获取展示实体的位置（方块中心）
-        val entityLocation = block.location.toCenterLocation()
-
-        // 根据开关状态播放对应音效
-        val sound = if (previousLit) Sound.BLOCK_STONE_BUTTON_CLICK_OFF else Sound.BLOCK_STONE_BUTTON_CLICK_ON
-        player.playSound(entityLocation, sound, 1.0f, 1.0f)
-    }
-
-    override fun onPreBlockBreak(context: io.github.pylonmc.rebar.block.context.BlockBreakContext): Boolean {
-        stopRainbowTask()
-        tryRemoveAllEntities()
-        return true
-    }
-
-    override fun getDropItem(context: io.github.pylonmc.rebar.block.context.BlockBreakContext): ItemStack? {
-        val itemStack = defaultItem?.createNewItemStack()
-        return itemStack ?: ItemStack(if (isRainbow) Material.WHITE_STAINED_GLASS else lampColor.stainedGlassMaterial)
-    }
-    
-    override fun tick() {
-        tickFaultyMode()
-    }
-    
-    override fun getWaila(player: Player): WailaDisplay? {
-        val display = WailaDisplay.of(this, player)
-        val status = when {
-            isFaulty -> Component.translatable("rebarillumination.message.lamp.faulty_mode")
-            isLit -> Component.translatable("rebarillumination.message.lamp.state_on")
-            else -> Component.translatable("rebarillumination.message.lamp.state_off")
-        }
-        display.add(status)
-        return display
     }
 }
