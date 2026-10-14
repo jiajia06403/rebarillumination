@@ -1,9 +1,8 @@
 # Rebar Illumination
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Minecraft](https://img.shields.io/badge/Minecraft-26.1.2-blue.svg)](https://www.minecraft.net/)
-[![Rebar](https://img.shields.io/badge/Rebar-0.40.0--26.1-blue.svg)](https://github.com/pylonmc/rebar)
-[![Pylon](https://img.shields.io/badge/Pylon-0.38.0--26.1-blue.svg)](https://github.com/pylonmc/pylon)
+[![Minecraft](https://img.shields.io/badge/Minecraft-26.2-blue.svg)](https://www.minecraft.net/)
+[![Rebar](https://img.shields.io/badge/Rebar-0.44.4--26.2-blue.svg)](https://github.com/pylonmc/rebar)
 
 [English Version](README.en.md)
 
@@ -23,7 +22,7 @@ Rebar Illumination 是 Rebar 框架的一个附属组件，为 Minecraft 提供�
 
 ### 📦 安装
 
-1. 确保服务器已安装 [Rebar](https://github.com/pylonmc/rebar) 和 [Pylon](https://github.com/pylonmc/pylon)
+1. 确保服务器已安装 [Rebar](https://github.com/pylonmc/rebar)
 2. 将 `RebarIllumination.jar` 放入服务器的 `plugins` 目录
 3. 重启服务器
 

@@ -1,9 +1,8 @@
 # Rebar Illumination
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Minecraft](https://img.shields.io/badge/Minecraft-26.1.2-blue.svg)](https://www.minecraft.net/)
-[![Rebar](https://img.shields.io/badge/Rebar-0.40.0--26.1-blue.svg)](https://github.com/pylonmc/rebar)
-[![Pylon](https://img.shields.io/badge/Pylon-0.38.0--26.1-blue.svg)](https://github.com/pylonmc/pylon)
+[![Minecraft](https://img.shields.io/badge/Minecraft-26.2-blue.svg)](https://www.minecraft.net/)
+[![Rebar](https://img.shields.io/badge/Rebar-0.44.4--26.2-blue.svg)](https://github.com/pylonmc/rebar)
 
 [中文版](README.md)
 
@@ -23,7 +22,7 @@ Rebar Illumination is an addon for the Rebar framework that provides a rich colo
 
 ### 📦 Installation
 
-1. Ensure [Rebar](https://github.com/pylonmc/rebar) and [Pylon](https://github.com/pylonmc/pylon) are installed on your server
+1. Ensure [Rebar](https://github.com/pylonmc/rebar) is installed on your server
 2. Place `RebarIllumination.jar` in your server's `plugins` directory
 3. Restart your server
 
