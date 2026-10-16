@@ -3,8 +3,8 @@
 ![Rebar Illumination](readme-header.png)
 
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Minecraft](https://img.shields.io/badge/Minecraft-26.2-blue.svg)](https://www.minecraft.net/)
-[![Rebar](https://img.shields.io/badge/Rebar-0.44.4--26.2-blue.svg)](https://github.com/pylonmc/rebar)
+[![Minecraft](https://img.shields.io/badge/Minecraft-26.2-green.svg)](https://www.minecraft.net/)
+[![Rebar](https://img.shields.io/badge/Rebar-0.44.4--26.2-orange.svg)](https://github.com/pylonmc/rebar)
 
 [English Version](README.en.md)
 
