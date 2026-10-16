@@ -2,6 +2,7 @@
 .workbuddy/
 .gradle/
 .kotlin/
+.vscode/
 build/
 run/
 bin/
