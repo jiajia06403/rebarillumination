@@ -24,7 +24,7 @@ repositories {
 val rebarVersion = project.properties["rebar.version"] as String
 
 dependencies {
-    compileOnly("io.papermc.paper:paper-api:26.2.build.+")
+    compileOnly("io.papermc.paper:paper-api:26.3.build.+")
     compileOnly("io.github.pylonmc:rebar:$rebarVersion")
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
     compileOnly("org.jetbrains.kotlin:kotlin-reflect:2.3.0")
@@ -59,7 +59,7 @@ bukkit {
     name = project.name
     main = project.properties["main-class"] as String
     version = project.version.toString()
-    apiVersion = "26.2"
+    apiVersion = "26.3"
     depend = listOf("Rebar")
     load = BukkitPluginDescription.PluginLoadOrder.STARTUP
 }
@@ -75,5 +75,5 @@ tasks.runServer {
     }
 
     maxHeapSize = "2G"
-    minecraftVersion("26.2")
+    minecraftVersion("26.3")
 }

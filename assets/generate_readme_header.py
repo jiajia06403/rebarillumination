@@ -115,11 +115,11 @@ def main():
     p16 = build_icon()
     zh = build_banner(p16,
                       "丰富的彩色照明系统 · 5 种灯具", 30,
-                      ["Rebar 附属", "MC 26.2"])
+                      ["Rebar 附属", "MC 26.3"])
     zh.save(OUT_BANNER_ZH, optimize=True)
     en = build_banner(p16,
                       "Colorful lights · 5 lamp types", 26,
-                      ["Rebar Addon", "MC 26.2"])
+                      ["Rebar Addon", "MC 26.3"])
     en.save(OUT_BANNER_EN, optimize=True)
     print("Generated:")
     for f in (OUT_BANNER_ZH, OUT_BANNER_EN, OUT_ICON, OUT_ICON_PREVIEW):

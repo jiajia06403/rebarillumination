@@ -27,7 +27,7 @@ class LampBlock(
 
     // 方块灯是实心染色玻璃，粒子锚点在方块中心（会被方块遮挡），故放大扩散半径与数量，
     // 让粒子逸出方块边界而可见；中心仍是方块中心，不抬到方块上方。
-    override val faultParticleSpread: Double = 0.8
+    override val faultParticleSpread: Double = 0.4
     override val faultParticleCount: Int = 12
 
     @Suppress("unused")

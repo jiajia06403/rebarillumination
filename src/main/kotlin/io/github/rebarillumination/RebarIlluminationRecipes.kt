@@ -85,7 +85,7 @@ object RebarIlluminationRecipes {
             val illumarItem = illumarItemOf(color) ?: return
             ShapedRecipe(lampKey, lampItem)
                 .shape("NNN", "NIN", "NNN")
-                .setIngredient('I', RecipeChoice.ExactChoice(illumarItem))
+                .setIngredient('I', RecipeChoice.exactChoice(illumarItem))
                 .setIngredient('N', RecipeChoice.MaterialChoice(
                     Material.IRON_NUGGET, Material.GOLD_NUGGET, Material.COPPER_NUGGET
                 ))
@@ -110,7 +110,7 @@ object RebarIlluminationRecipes {
             val illumarItem = illumarItemOf(color) ?: return
             ShapedRecipe(pillarLampKey, pillarLampItem)
                 .shape(" N ", " I ", " N ")
-                .setIngredient('I', RecipeChoice.ExactChoice(illumarItem))
+                .setIngredient('I', RecipeChoice.exactChoice(illumarItem))
                 .setIngredient('N', RecipeChoice.MaterialChoice(
                     Material.IRON_NUGGET, Material.GOLD_NUGGET, Material.COPPER_NUGGET
                 ))
@@ -135,7 +135,7 @@ object RebarIlluminationRecipes {
             val illumarItem = illumarItemOf(color) ?: return
             ShapedRecipe(barLampKey, barLampItem)
                 .shape("NIN")
-                .setIngredient('I', RecipeChoice.ExactChoice(illumarItem))
+                .setIngredient('I', RecipeChoice.exactChoice(illumarItem))
                 .setIngredient('N', RecipeChoice.MaterialChoice(
                     Material.IRON_NUGGET, Material.GOLD_NUGGET, Material.COPPER_NUGGET
                 ))
@@ -160,7 +160,7 @@ object RebarIlluminationRecipes {
             val illumarItem = illumarItemOf(color) ?: return
             ShapedRecipe(sphereLampKey, sphereLampItem)
                 .shape(" N ", "NIN", " N ")
-                .setIngredient('I', RecipeChoice.ExactChoice(illumarItem))
+                .setIngredient('I', RecipeChoice.exactChoice(illumarItem))
                 .setIngredient('N', RecipeChoice.MaterialChoice(
                     Material.IRON_NUGGET, Material.GOLD_NUGGET, Material.COPPER_NUGGET
                 ))
@@ -187,14 +187,14 @@ object RebarIlluminationRecipes {
             val top = ShapedRecipe(
                 NamespacedKey(RebarIlluminationAddon.instance, "${LampShape.PATCH.blockKeyPrefix}_${suffix}_top"),
                 wallLampItem.clone()
-            ).shape("NNN", " I ").setIngredient('I', RecipeChoice.ExactChoice(illumarItem))
+            ).shape("NNN", " I ").setIngredient('I', RecipeChoice.exactChoice(illumarItem))
                 .setIngredient('N', RecipeChoice.MaterialChoice(
                     Material.IRON_NUGGET, Material.GOLD_NUGGET, Material.COPPER_NUGGET
                 ))
             val center = ShapedRecipe(
                 NamespacedKey(RebarIlluminationAddon.instance, "${LampShape.PATCH.blockKeyPrefix}_${suffix}_center"),
                 wallLampItem.clone()
-            ).shape(" I ", "NNN").setIngredient('I', RecipeChoice.ExactChoice(illumarItem))
+            ).shape(" I ", "NNN").setIngredient('I', RecipeChoice.exactChoice(illumarItem))
                 .setIngredient('N', RecipeChoice.MaterialChoice(
                     Material.IRON_NUGGET, Material.GOLD_NUGGET, Material.COPPER_NUGGET
                 ))

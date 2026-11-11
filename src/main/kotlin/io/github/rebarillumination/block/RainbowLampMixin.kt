@@ -5,7 +5,6 @@ import io.github.pylonmc.rebar.config.adapter.ConfigAdapter
 import io.github.pylonmc.rebar.util.delayTicks
 import io.github.rebarillumination.RebarIlluminationAddon
 import io.github.rebarillumination.util.LampColor
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.bukkit.Bukkit
 import org.bukkit.Material
@@ -55,7 +54,7 @@ interface RainbowLamp {
     fun startRainbowTask() {
         if (!isRainbow) return
         
-        rainbowJob = GlobalScope.launch {
+        rainbowJob = RebarIlluminationAddon.scope.launch {
             while (isRainbow && block.world.isChunkLoaded(block.chunk)) {
                 val currentTick = block.world.gameTime
                 val interval = RAINBOW_COLOR_CHANGE_INTERVAL
