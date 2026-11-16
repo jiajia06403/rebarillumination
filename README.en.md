@@ -31,6 +31,8 @@ Rebar Illumination is an addon for the Rebar framework that provides a rich colo
 ### 🎮 Usage
 
 - **Place**: Synthesize a lamp by first crafting the required Illum Lamp
+- **Recolor Lamps**: Craft any lamp (including rainbow) with an Illumar of another color (shapeless) to change its color
+- **Wash to Colorless**: Craft a colored lamp with a Water Bucket (shapeless) to strip its color; the empty bucket is returned
 - **Toggle Lamp State**: Sneak + Right-click on a placed lamp
 - **Fix Faulty Mode**: Right-click a faulty lamp with same-colored Illumar
 
