@@ -29,8 +29,8 @@ dependencies {
     compileOnly("org.jetbrains.kotlin:kotlin-stdlib:2.3.0")
     compileOnly("org.jetbrains.kotlin:kotlin-reflect:2.3.0")
     compileOnly("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
-    compileOnly("xyz.xenondevs.invui:invui:2.3.0")
-    compileOnly("xyz.xenondevs.invui:invui-kotlin:2.3.0")
+    compileOnly("xyz.xenondevs.invui:invui:2.5.1")
+    compileOnly("xyz.xenondevs.invui:invui-kotlin:2.5.1")
 }
 
 idea {
